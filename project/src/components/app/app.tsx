@@ -8,17 +8,18 @@ import NotFound from '../../pages/not-found/not-found';
 import Login from '../../pages/login/login';
 import PrivateRoute from '../private-route/private-route';
 import Favorites from '../../pages/favorites/favorites';
+import {Offer} from '../../types/offer';
 
 type AppProps = {
-  countAds: number;
+  offers: Offer[];
 }
 function App(props: AppProps): JSX.Element {
-  const {countAds} = props;
+  const {offers} = props;
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Root} element={<Layout />}>
-          <Route index element={<MainPage countAds={countAds} />} />
+          <Route index element={<MainPage offers={offers} />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.Offer} element={<Property />} />
           <Route path={AppRoute.Favorites} element={

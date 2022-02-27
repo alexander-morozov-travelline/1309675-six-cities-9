@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-
-const COUNT_ADS = 10;
+import {offers} from './mocks/offers';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App countAds={COUNT_ADS}/>
+    <App offers={offers}/>
   </React.StrictMode>,
   document.getElementById('root'));
