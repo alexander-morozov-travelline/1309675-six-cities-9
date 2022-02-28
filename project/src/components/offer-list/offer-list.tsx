@@ -8,14 +8,14 @@ type OfferListProps = {
 
 function OfferList(offerListProps: OfferListProps): JSX.Element {
   const {offerList} = offerListProps;
-  const [activeOffer, setActiveOffer] = useState(0);
+  const [activeOffer, setActiveOffer] = useState<null|number>(null);
 
   const handleMouseEnter = (id: number): void => {
     setActiveOffer(id);
   }
 
   const handleMouseLeave = (): void => {
-    setActiveOffer(0);
+    setActiveOffer(null);
   }
 
   return (

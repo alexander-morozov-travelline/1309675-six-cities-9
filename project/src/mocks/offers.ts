@@ -28,7 +28,7 @@ export const offers: Offer[] = [
       '/img/apartment-03.jpg',
     ],
     'isFavorite': true,
-    'isPremium': false,
+    'isPremium': true,
     'location': {
       'latitude': 52.35514938496378,
       'longitude': 4.673877537499948,
@@ -90,7 +90,7 @@ export const offers: Offer[] = [
         'longitude': 4.895168,
         'zoom': 10,
       },
-      'name': 'Amsterdam',
+      'name': 'Cologne',
     },
     'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     'goods': [

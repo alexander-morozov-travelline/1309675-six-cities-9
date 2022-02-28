@@ -6,6 +6,7 @@ type OfferProps = {
   onMouseEnter: (id: number) => void,
   onMouseLeave: () => void,
 }
+
 function PlaceCard(offerProps: OfferProps) {
   const {offer, onMouseEnter, onMouseLeave} = offerProps;
   const { id, isPremium, previewImage, price, rating, title, type } = offer;
