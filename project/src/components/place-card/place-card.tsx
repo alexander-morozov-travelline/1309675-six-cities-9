@@ -1,14 +1,17 @@
 import { Offer } from '../../types/offer';
+import React, {MouseEventHandler} from "react";
 
 type OfferProps = {
-  offer: Offer
+  offer: Offer,
+  onMouseEnter: (id: number) => void,
+  onMouseLeave: () => void,
 }
 function PlaceCard(offerProps: OfferProps) {
-  const {offer} = offerProps;
-  const { isPremium, previewImage, price, rating, title, type } = offer;
+  const {offer, onMouseEnter, onMouseLeave} = offerProps;
+  const { id, isPremium, previewImage, price, rating, title, type } = offer;
 
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card" onMouseEnter={ () => onMouseEnter(id)} onMouseLeave={onMouseLeave}>
       <div className="place-card__mark" hidden={!isPremium}>
         <span>Premium</span>
       </div>
