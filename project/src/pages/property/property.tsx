@@ -1,8 +1,8 @@
 import Header from '../../components/header/header';
 import {AuthorizationStatus} from '../../const';
-import ReviewForm from "../../components/review-form/review-form";
+import ReviewForm from '../../components/review-form/review-form';
 import {useParams} from 'react-router-dom';
-import {Offer} from "../../types/offer";
+import {Offer} from '../../types/offer';
 
 type PropertyProps = {
   offers: Offer[],

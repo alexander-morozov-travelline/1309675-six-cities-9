@@ -1,5 +1,5 @@
-import {SyntheticEvent, useState, Fragment} from "react";
-import {RateList} from "../../const";
+import {SyntheticEvent, useState, Fragment} from 'react';
+import {RateList} from '../../const';
 
 function ReviewForm(): JSX.Element {
   const handleFormSubmit = (evt: SyntheticEvent) => {

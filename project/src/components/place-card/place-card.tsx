@@ -1,7 +1,7 @@
 import { Offer } from '../../types/offer';
-import React, {MouseEventHandler} from "react";
-import {Link} from "react-router-dom";
-import {AppRoute} from "../../const";
+import React, {MouseEventHandler} from 'react';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
 type OfferProps = {
   offer: Offer,
