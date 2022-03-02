@@ -1,4 +1,4 @@
-import {City, Host, Location, Offer} from '../types/offer';
+import {Offer} from '../types/offer';
 
 export const offers: Offer[] = [
   {
@@ -121,4 +121,4 @@ export const offers: Offer[] = [
     'title': 'Canal View Prinsengracht',
     'type': 'Apartment',
   },
-]
+];

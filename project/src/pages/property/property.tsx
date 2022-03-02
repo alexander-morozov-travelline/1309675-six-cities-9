@@ -51,7 +51,7 @@ function Property(propertyProps: PropertyProps) {
                 {
                   offer.images.map((image, index) =>
                     (
-                      <div key={index} className="property__image-wrapper">
+                      <div key={index.toString()} className="property__image-wrapper">
                         <img className="property__image" src={image} alt="Place image"/>
                       </div>
                     ),
@@ -61,7 +61,8 @@ function Property(propertyProps: PropertyProps) {
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                { offer.isPremium &&
+                {
+                  offer.isPremium &&
                   <div className="property__mark">
                     <span>Premium</span>
                   </div>
@@ -102,7 +103,7 @@ function Property(propertyProps: PropertyProps) {
                   <ul className="property__inside-list">
                     {
                       offer.goods.map((item, number) => (
-                        <li className="property__inside-item" key={number}>
+                        <li className="property__inside-item" key={number.toString()}>
                           {item}
                         </li>
                       ))

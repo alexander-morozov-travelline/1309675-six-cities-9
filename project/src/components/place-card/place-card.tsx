@@ -1,5 +1,5 @@
 import { Offer } from '../../types/offer';
-import React, {MouseEventHandler} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 

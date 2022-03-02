@@ -1,5 +1,4 @@
 import {Offer} from '../../types/offer';
-import PlaceCard from '../place-card/place-card';
 import React from 'react';
 import FavoriteCard from '../favorite-card/favorite-card';
 
@@ -11,11 +10,9 @@ function FavoritesPlaces(favoriteLocationProps: FavoritesPlacesProps): JSX.Eleme
   return (
     <div className="favorites__places">
       {
-        offers.map((offer) =>
-          <FavoriteCard
-            key={offer.id}
-            offer={offer}
-          />)
+        offers.map(
+          (offer) => <FavoriteCard key={offer.id} offer={offer} />,
+        )
       }
     </div>
   );

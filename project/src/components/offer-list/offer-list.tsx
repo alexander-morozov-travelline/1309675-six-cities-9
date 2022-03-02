@@ -12,22 +12,25 @@ function OfferList(offerListProps: OfferListProps): JSX.Element {
 
   const handleMouseEnter = (id: number): void => {
     setActiveOffer(id);
-  }
+  };
 
   const handleMouseLeave = (): void => {
     setActiveOffer(null);
-  }
+  };
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className="cities__places-list places__list tabs__content" data-active-offer={activeOffer}>
       {
         offerList.map((offer) =>
-          <PlaceCard
-            key={offer.id}
-            offer={offer}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          />)
+          (
+            <PlaceCard
+              key={offer.id}
+              offer={offer}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            />
+          ),
+        )
       }
     </div>
   );

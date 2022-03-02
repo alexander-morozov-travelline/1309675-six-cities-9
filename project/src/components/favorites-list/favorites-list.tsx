@@ -11,11 +11,14 @@ function FavoritesList(favoritesListProps: FavoritesListProps): JSX.Element {
   return (
     <ul className="favorites__list">
       {
-        offersGroupByCity.map( ({city, offers}) =>
-          <li className="favorites__locations-items" key={city}>
-            <FavoriteLocation locationName={city} />
-            <FavoritesPlaces offers={offers} />
-          </li>
+        offersGroupByCity.map(
+          ({city, offers}) =>
+            (
+              <li className="favorites__locations-items" key={city}>
+                <FavoriteLocation locationName={city} />
+                <FavoritesPlaces offers={offers} />
+              </li>
+            ),
         )
       }
     </ul>

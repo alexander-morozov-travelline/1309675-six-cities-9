@@ -12,7 +12,8 @@ function FavoriteCard(favoriteCardProps: FavoriteCardProps): JSX.Element {
 
   return (
     <article className="favorites__card place-card">
-      {isPremium &&
+      {
+        isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
