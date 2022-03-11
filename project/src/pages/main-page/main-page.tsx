@@ -1,7 +1,8 @@
-import {Offer} from '../../types/offer';
+import {Offer, Point} from '../../types/offer';
 import OfferList from '../../components/offer-list/offer-list';
 import Header from '../../components/header/header';
 import {AuthorizationStatus} from '../../const';
+import Map from '../../components/map/map';
 
 type MainPageProps = {
   offers: Offer[];
@@ -9,6 +10,15 @@ type MainPageProps = {
 
 function MainPage(mainPageProps: MainPageProps): JSX.Element {
   const {offers} = mainPageProps;
+  const city = offers[0].city.location;
+  const points = offers.map((offer): Point => {
+    return {
+      title: offer.title,
+      latitude: offer.location.latitude,
+      longitude: offer.location.longitude,
+    };
+  });
+
   return (
     <>
       <div style={{display: 'none'}}>
@@ -94,7 +104,9 @@ function MainPage(mainPageProps: MainPageProps): JSX.Element {
                 </div>
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"></section>
+                <section className="cities__map map">
+                  <Map city={city} points={points} selectedPoint={activeOffer} />
+                </section>
               </div>
             </div>
           </div>
