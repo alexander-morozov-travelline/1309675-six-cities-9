@@ -1,7 +1,9 @@
-import {Offer} from '../../types/offer';
+import {Offer, Point} from '../../types/offer';
 import OfferList from '../../components/offer-list/offer-list';
 import Header from '../../components/header/header';
 import {AuthorizationStatus} from '../../const';
+import Map from '../../components/map/map';
+import {useState} from 'react';
 
 type MainPageProps = {
   offers: Offer[];
@@ -9,6 +11,18 @@ type MainPageProps = {
 
 function MainPage(mainPageProps: MainPageProps): JSX.Element {
   const {offers} = mainPageProps;
+  const city = offers[0].city.location;
+  const points = offers.map((offer): Point => (
+    {
+      id: offer.id,
+      title: offer.title,
+      latitude: offer.location.latitude,
+      longitude: offer.location.longitude,
+    }
+  ));
+
+  const [activeOffer, setActiveOffer] = useState<null|number>(null);
+
   return (
     <>
       <div style={{display: 'none'}}>
@@ -90,11 +104,13 @@ function MainPage(mainPageProps: MainPageProps): JSX.Element {
                   </ul>
                 </form>
                 <div className="cities__places-list places__list tabs__content">
-                  <OfferList offerList={offers}/>
+                  <OfferList offerList={offers} setActiveOffer={setActiveOffer} />
                 </div>
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"></section>
+                <section className="cities__map map">
+                  <Map city={city} points={points} selectedPointId={activeOffer} />
+                </section>
               </div>
             </div>
           </div>
