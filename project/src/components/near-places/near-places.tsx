@@ -3,13 +3,13 @@ import PlaceCard from '../place-card/place-card';
 import React from 'react';
 import {CardPlaceType, CardType} from '../../const';
 
-type OfferListProps = {
+type NearPlacesProperties = {
   offerList: Offers,
   setActiveOffer: (id: number | null) => void,
 }
 
-function OfferList(offerListProps: OfferListProps): JSX.Element {
-  const {offerList, setActiveOffer} = offerListProps;
+function NearPlaces(nearPlacesProperties: NearPlacesProperties):JSX.Element {
+  const {offerList, setActiveOffer} = nearPlacesProperties;
 
   const handleMouseEnter = (id: number): void => {
     setActiveOffer(id);
@@ -18,16 +18,15 @@ function OfferList(offerListProps: OfferListProps): JSX.Element {
   const handleMouseLeave = (): void => {
     setActiveOffer(null);
   };
-
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className="near-places__list places__list">
       {
         offerList.map((offer) =>
           (
             <PlaceCard
               key={offer.id}
-              cardType={CardType.Cities}
-              cardPlaceType={CardPlaceType.Cities}
+              cardType={CardType.Near}
+              cardPlaceType={CardPlaceType.Near}
               offer={offer}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
@@ -39,4 +38,4 @@ function OfferList(offerListProps: OfferListProps): JSX.Element {
   );
 }
 
-export default OfferList;
+export default NearPlaces;

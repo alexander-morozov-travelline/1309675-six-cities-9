@@ -48,3 +48,15 @@ export const RateList: Rate[] = [
 
 export const URL_MARKER_DEFAULT = './img/pin.svg';
 export const URL_MARKER_CURRENT = './img/pin-active.svg';
+
+export const CardType = {
+  Cities: 'cities',
+  Near: 'near-places',
+  Favorites: 'favorites',
+};
+
+export const CardPlaceType = {
+  Cities: 'cities__place-card',
+  Near: 'near-places__card',
+  Favorites: 'favorites__card',
+};

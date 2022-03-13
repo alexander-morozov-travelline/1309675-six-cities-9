@@ -2,23 +2,26 @@ import { Offer } from '../../types/offer';
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
+import {getStyleWidthByRating} from '../../utils';
 
 type OfferProps = {
   offer: Offer,
+  cardType: string,
+  cardPlaceType: string,
   onMouseEnter: (id: number) => void,
   onMouseLeave: () => void,
 }
 
 function PlaceCard(offerProps: OfferProps) {
-  const {offer, onMouseEnter, onMouseLeave} = offerProps;
+  const {offer, cardType, cardPlaceType, onMouseEnter, onMouseLeave } = offerProps;
   const { id, isPremium, previewImage, price, rating, title, type } = offer;
 
   return (
-    <article className="cities__place-card place-card" onMouseEnter={ () => onMouseEnter(id)} onMouseLeave={onMouseLeave}>
+    <article className={`${cardPlaceType} place-card`} onMouseEnter={ () => onMouseEnter(id)} onMouseLeave={onMouseLeave}>
       <div className="place-card__mark" hidden={!isPremium}>
         <span>Premium</span>
       </div>
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </Link>
@@ -38,7 +41,7 @@ function PlaceCard(offerProps: OfferProps) {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating * 10}%` }} />
+            <span style={getStyleWidthByRating(rating)} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

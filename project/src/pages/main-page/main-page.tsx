@@ -1,25 +1,19 @@
-import {Offer, Point} from '../../types/offer';
+import {Offers} from '../../types/offer';
 import OfferList from '../../components/offer-list/offer-list';
 import Header from '../../components/header/header';
 import {AuthorizationStatus} from '../../const';
 import Map from '../../components/map/map';
 import {useState} from 'react';
+import {getPointsFromOffers} from '../../utils';
 
 type MainPageProps = {
-  offers: Offer[];
+  offers: Offers;
 }
 
 function MainPage(mainPageProps: MainPageProps): JSX.Element {
   const {offers} = mainPageProps;
   const city = offers[0].city.location;
-  const points = offers.map((offer): Point => (
-    {
-      id: offer.id,
-      title: offer.title,
-      latitude: offer.location.latitude,
-      longitude: offer.location.longitude,
-    }
-  ));
+  const points = getPointsFromOffers(offers);
 
   const [activeOffer, setActiveOffer] = useState<null|number>(null);
 
