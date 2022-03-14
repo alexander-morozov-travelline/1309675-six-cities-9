@@ -16,7 +16,7 @@ export const comments: Comments = [
   {
     comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     date: 'Sun Mar 13 2022 15:41:05 GMT+0300 (Москва, стандартное время)',
-    id: 1,
+    id: 2,
     rating: 8,
     user: {
       avatarUrl: '/img/avatar-max.jpg',
