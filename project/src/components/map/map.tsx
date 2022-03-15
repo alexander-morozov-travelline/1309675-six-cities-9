@@ -2,7 +2,7 @@ import {useRef, useEffect} from 'react';
 import {Icon, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
-import {Location, Points} from '../../types/offer';
+import {City, Points} from '../../types/offer';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
 const defaultCustomIcon = new Icon({
@@ -18,7 +18,7 @@ const currentCustomIcon = new Icon({
 });
 
 type MapProps = {
-  city: Location;
+  city: City;
   points: Points;
   selectedPointId: number | null;
 };
@@ -31,18 +31,24 @@ function Map(props: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
-      points.forEach((point) => {
+      const markers = points.map((point, number) => {
         const marker = new Marker({
           lat: point.latitude,
           lng: point.longitude,
         });
-
         marker
-          .setIcon(
-            point.id === selectedPointId ? currentCustomIcon : defaultCustomIcon,
-          )
+          .setIcon( selectedPointId === point.id ? currentCustomIcon : defaultCustomIcon)
           .addTo(map);
+        return marker;
       });
+
+      return () => {
+        markers.forEach((marker) => {
+          if (map) {
+            map.removeLayer(marker);
+          }
+        });
+      };
     }
   }, [map, points, selectedPointId]);
 

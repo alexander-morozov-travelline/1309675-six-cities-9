@@ -8,18 +8,16 @@ import NotFound from '../../pages/not-found/not-found';
 import Login from '../../pages/login/login';
 import PrivateRoute from '../private-route/private-route';
 import Favorites from '../../pages/favorites/favorites';
-import {Offer} from '../../types/offer';
+import {State} from '../../types/state';
+import {useAppSelector} from '../../hooks/hooks';
 
-type AppProps = {
-  offers: Offer[];
-}
-function App(props: AppProps): JSX.Element {
-  const {offers} = props;
+function App(): JSX.Element {
+  const {offers, city} = useAppSelector((state: State) => state);
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Root} element={<Layout />}>
-          <Route index element={<MainPage offers={offers} />} />
+          <Route index element={<MainPage offers={offers} city={city}/>} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.ItemOffer} element={<Property offers={offers} />} />
           <Route path={AppRoute.Favorites} element={

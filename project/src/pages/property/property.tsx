@@ -27,7 +27,7 @@ function Property(propertyProps: PropertyProps) {
   const {offers} = propertyProps;
   const {id} = useParams<{id: string}>();
   const offer = getOffer(offers, Number(id));
-  const city = offer.city.location;
+  const city = offer.city;
   const points = getPointsFromOffers(offers);
   const [activeOffer, setActiveOffer] = useState<null|number>(null);
 
