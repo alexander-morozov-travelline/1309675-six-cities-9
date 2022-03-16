@@ -114,3 +114,41 @@ export const CitiesList: City[] =  [
     name: 'Dusseldorf',
   },
 ];
+
+
+export const SortType = {
+  POPULAR: 'popular',
+  PRICE_LOW_TO_HIGH: 'priceLowToHigh',
+  PRICE_HIGH_TO_LOW: 'priceHighToLow',
+  TOP_RATED: 'topRated',
+};
+
+type SortTypeKeys = keyof typeof SortType;
+
+export type SortTypeId = typeof SortType[SortTypeKeys];
+
+export type Sort = {
+  type: SortTypeId,
+  title: string,
+};
+
+export const DEFAULT_SORT = {
+  type: SortType.POPULAR,
+  title: 'Popular',
+};
+
+export const SortList: Sort[] = [
+  DEFAULT_SORT,
+  {
+    type: SortType.PRICE_LOW_TO_HIGH,
+    title: 'Price: low to high',
+  },
+  {
+    type: SortType.PRICE_HIGH_TO_LOW,
+    title: 'Price: high to low',
+  },
+  {
+    type: SortType.TOP_RATED,
+    title: 'Top rated first',
+  },
+];

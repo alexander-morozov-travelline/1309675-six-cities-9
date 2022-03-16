@@ -1,6 +1,7 @@
 import {Offers, Offer, OffersGroupByCity, Point} from './types/offer';
 import CSS from 'csstype';
 import dayjs from 'dayjs';
+import {Sort, SortType} from './const';
 
 export const groupOffersByCity = (offers: Offers): OffersGroupByCity => {
   const offersGroupByCityObj: {[property: string]: Offers} = {};
@@ -32,3 +33,25 @@ export const getPointsFromOffers = (offers: Offers) => offers.map((offer: Offer)
     longitude: offer.location.longitude,
   }
 ));
+
+export const sortRatingDown = (offer1: Offer, offer2: Offer) =>
+  offer1.rating < offer2.rating ? 1 : -1;
+
+export const sortPriceLowToHigh = (offer1: Offer, offer2: Offer) =>
+  offer1.price > offer2.price ? 1 : -1;
+
+export const sortPriceHighToLow = (offer1: Offer, offer2: Offer) =>
+  offer1.price < offer2.price ? 1 : -1;
+
+export const getSortedOffers = (sortType: Sort, offers: Offers) => {
+  const sortedOffers = [...offers];
+  switch (sortType.type) {
+    case SortType.PRICE_LOW_TO_HIGH:
+      return sortedOffers.sort(sortPriceLowToHigh);
+    case SortType.PRICE_HIGH_TO_LOW:
+      return sortedOffers.sort(sortPriceHighToLow);
+    case SortType.TOP_RATED:
+      return sortedOffers.sort(sortRatingDown);
+  }
+  return sortedOffers;
+};
