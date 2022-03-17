@@ -1,12 +1,15 @@
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {Link} from 'react-router-dom';
+import SignOut from '../sign-out/sign-out';
+import {useAppSelector} from '../../hooks/hooks';
+import {State} from '../../types/state';
 
 type HeaderProps = {
-  authorizationStatus: AuthorizationStatus,
   isLoginPage?: boolean
 };
 
-function Header({authorizationStatus, isLoginPage = false}: HeaderProps): JSX.Element {
+function Header({isLoginPage = false}: HeaderProps): JSX.Element {
+  const {authorizationStatus} = useAppSelector((state: State) => state);
   return (
     <header className="header">
       <div className="container">
@@ -35,11 +38,7 @@ function Header({authorizationStatus, isLoginPage = false}: HeaderProps): JSX.El
                   {
                     (authorizationStatus === AuthorizationStatus.Auth)
                       ?
-                      <li className="header__nav-item">
-                        <a className="header__nav-link" href="#">
-                          <span className="header__signout">Sign out</span>
-                        </a>
-                      </li>
+                      <SignOut />
                       : null
                   }
                 </ul>
