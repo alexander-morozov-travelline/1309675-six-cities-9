@@ -152,3 +152,17 @@ export const SortList: Sort[] = [
     title: 'Top rated first',
   },
 ];
+
+export enum HTTP_CODE {
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  NOT_FOUND = 404,
+}
+
+export enum APIRoute {
+  Comments = '/comments',
+  Favorites = '/favorite',
+  Login = '/login',
+  Logout = '/logout',
+  Offers = '/hotels',
+}
