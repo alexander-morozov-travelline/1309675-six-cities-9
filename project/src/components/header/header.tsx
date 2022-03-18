@@ -29,10 +29,8 @@ function Header(): JSX.Element {
                 </Link>
               </li>
               {
-                (authorizationStatus === AuthorizationStatus.Auth)
-                  ?
-                  <SignOut />
-                  : null
+                authorizationStatus === AuthorizationStatus.Auth &&
+                <SignOut />
               }
             </ul>
           </nav>
