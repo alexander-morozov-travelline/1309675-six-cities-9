@@ -1,5 +1,4 @@
 import Header from '../../components/header/header';
-import {AuthorizationStatus} from '../../const';
 import ReviewForm from '../../components/review-form/review-form';
 import {useParams} from 'react-router-dom';
 import {Offers, Offer} from '../../types/offer';
@@ -33,7 +32,7 @@ function Property(propertyProps: PropertyProps) {
 
   return (
     <div className="page">
-      <Header authorizationStatus={AuthorizationStatus.Auth}/>
+      <Header />
 
       <main className="page__main page__main--property">
         <section className="property">

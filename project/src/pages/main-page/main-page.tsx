@@ -1,7 +1,7 @@
 import {City, Offers} from '../../types/offer';
 import OfferList from '../../components/offer-list/offer-list';
 import Header from '../../components/header/header';
-import {AuthorizationStatus, DEFAULT_SORT, Sort} from '../../const';
+import {DEFAULT_SORT, Sort} from '../../const';
 import Map from '../../components/map/map';
 import {useState} from 'react';
 import {getPointsFromOffers, getSortedOffers} from '../../utils';
@@ -25,7 +25,7 @@ function MainPage(mainPageProps: MainPageProps): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
-      <Header authorizationStatus={AuthorizationStatus.Auth}/>
+      <Header />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

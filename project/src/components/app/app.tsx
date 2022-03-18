@@ -1,6 +1,6 @@
 import MainPage from '../../pages/main-page/main-page';
-import {Route, Routes, BrowserRouter} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {Route, Routes} from 'react-router-dom';
+import {AppRoute} from '../../const';
 import React from 'react';
 import Layout from '../layout/layout';
 import Property from '../../pages/property/property';
@@ -10,18 +10,31 @@ import PrivateRoute from '../private-route/private-route';
 import Favorites from '../../pages/favorites/favorites';
 import {State} from '../../types/state';
 import {useAppSelector} from '../../hooks/hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
+import browserHistory from '../../browser-history';
+import HistoryRouter from '../history-route/history-route';
 
 function App(): JSX.Element {
-  const {offers, city} = useAppSelector((state: State) => state);
+  const {
+    authorizationStatus,
+    isDataLoaded,
+    offers,
+    city,
+  } = useAppSelector((state: State) => state);
+
+  if(!isDataLoaded) {
+    return (<LoadingScreen />);
+  }
+
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Root} element={<Layout />}>
           <Route index element={<MainPage offers={offers} city={city}/>} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.ItemOffer} element={<Property offers={offers} />} />
           <Route path={AppRoute.Favorites} element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <Favorites offers={offers} />
             </PrivateRoute>
           }
@@ -29,7 +42,7 @@ function App(): JSX.Element {
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
