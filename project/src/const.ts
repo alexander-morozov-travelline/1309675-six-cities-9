@@ -166,3 +166,10 @@ export enum APIRoute {
   Logout = '/logout',
   Offers = '/hotels',
 }
+
+export const OfferTypeTitle = new Map([
+  ['apartment', 'Apartment'],
+  ['room', 'Private Room'],
+  ['house', 'House'],
+  ['hotel', 'Hotel'],
+]);

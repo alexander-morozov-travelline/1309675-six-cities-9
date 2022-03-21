@@ -1,7 +1,7 @@
 import {Offers, Offer, OffersGroupByCity, Point} from './types/offer';
 import CSS from 'csstype';
 import dayjs from 'dayjs';
-import {Sort, SortType} from './const';
+import {OfferTypeTitle, Sort, SortType} from './const';
 
 export const groupOffersByCity = (offers: Offers): OffersGroupByCity => {
   const offersGroupByCityObj: {[property: string]: Offers} = {};
@@ -54,4 +54,9 @@ export const getSortedOffers = (sortType: Sort, offers: Offers) => {
       return sortedOffers.sort(sortRatingDown);
   }
   return sortedOffers;
+};
+
+export const getOfferTypeTitle = (type: string): string | null => {
+  const offerTypeTitle = OfferTypeTitle.get(type);
+  return offerTypeTitle ? offerTypeTitle : null;
 };

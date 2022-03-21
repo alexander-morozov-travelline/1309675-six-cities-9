@@ -1,13 +1,13 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {api} from '../store';
 import {store} from '../store';
-import {requireAuthorization, redirectToRoute, loadOffers} from './action';
+import {requireAuthorization, redirectToRoute, loadOffers, loadItemOffer} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import {Offers} from '../types/offer';
+import {Offer, Offers} from '../types/offer';
 
 export const fetchOffersAction = createAsyncThunk(
   'data/fetchOffers',
@@ -16,6 +16,19 @@ export const fetchOffersAction = createAsyncThunk(
       const {data} = await api.get<Offers>(APIRoute.Offers);
       store.dispatch(loadOffers(data));
     } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchItemOfferAction = createAsyncThunk(
+  'data/fetchItemOffer',
+  async (id: string) => {
+    try {
+      const {data} = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
+      store.dispatch(loadItemOffer(data));
+    } catch (error) {
+      store.dispatch(loadItemOffer(null));
       errorHandle(error);
     }
   },
@@ -41,7 +54,7 @@ export const loginAction = createAsyncThunk(
       const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      store.dispatch(redirectToRoute(AppRoute.Favorites));
+      store.dispatch(redirectToRoute(AppRoute.Root));
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
