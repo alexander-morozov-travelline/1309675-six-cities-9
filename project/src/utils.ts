@@ -21,7 +21,7 @@ export const groupOffersByCity = (offers: Offers): OffersGroupByCity => {
   return offersGroupByCity;
 };
 
-export const getStyleWidthByRating = (rating: number): CSS.Properties => ({width: `${rating * 10}%`});
+export const getStyleWidthByRating = (rating: number): CSS.Properties => ({width: `${rating * 20}%`});
 
 export const getFormattedDate = (date: dayjs.ConfigType, format: string) => dayjs(date).format(format);
 

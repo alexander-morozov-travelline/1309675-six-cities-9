@@ -1,9 +1,8 @@
 import Header from '../../components/header/header';
 import ReviewForm from '../../components/review-form/review-form';
 import {useParams} from 'react-router-dom';
-import {Offers} from '../../types/offer';
+import {Comments, Offers} from '../../types/offer';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-import {comments} from '../../mocks/comments';
 import Map from '../../components/map/map';
 import {getOfferTypeTitle, getPointsFromOffers, getStyleWidthByRating} from '../../utils';
 import NearPlaces from '../../components/near-places/near-places';
@@ -13,6 +12,8 @@ import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {State} from '../../types/state';
 import NotFound from '../not-found/not-found';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
+import {AuthorizationStatus} from '../../const';
+import {loadNearOffers, loadOfferComments, setItemOffer} from '../../store/action';
 
 type PropertyProps = {
   offers: Offers,
@@ -24,12 +25,22 @@ function Property(propertyProps: PropertyProps) {
   const {id=null} = useParams<{id: string}>();
   const points = getPointsFromOffers(offers);
   const [activeOffer, setActiveOffer] = useState<null|number>(null);
-  const {itemOffer: offer, comments, nearOffers} = useAppSelector((state: State) => state);
+  const {
+    itemOffer: offer,
+    comments,
+    nearOffers,
+    authorizationStatus,
+  } = useAppSelector((state: State) => state);
 
   useEffect( () => {
     if(id) {
       dispatch(fetchOfferDataAction(id));
     }
+    return () => {
+      dispatch(setItemOffer(undefined));
+      dispatch(loadOfferComments([] as Comments));
+      dispatch(loadNearOffers([] as Offers));
+    };
   }, [id, dispatch]);
 
   if(offer === undefined){
@@ -81,7 +92,7 @@ function Property(propertyProps: PropertyProps) {
                   <span style={getStyleWidthByRating(offer.rating)}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">4.8</span>
+                <span className="property__rating-value rating__value">{offer.rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
@@ -135,7 +146,10 @@ function Property(propertyProps: PropertyProps) {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
                 <ReviewsList comments={comments} />
-                <ReviewForm />
+                {
+                  authorizationStatus === AuthorizationStatus.Auth &&
+                  <ReviewForm />
+                }
               </section>
             </div>
           </div>

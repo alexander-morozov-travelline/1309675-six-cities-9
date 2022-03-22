@@ -1,12 +1,11 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {
-  loadItemOffer,
+  setItemOffer,
   loadNearOffers,
   loadOfferComments,
   loadOffers,
   requireAuthorization,
-  setCity,
-  setOffers
+  setCity
 } from './action';
 import {AuthorizationStatus, DEFAULT_CITY} from '../const';
 import {City, Comments, Offer, Offers} from '../types/offer';
@@ -26,14 +25,11 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setCity, (state, action) => {
       state.city = action.payload;
     })
-    .addCase(setOffers, (state, action) => {
-      state.offers = action.payload;
-    })
     .addCase(loadOffers, (state, actions) => {
       state.offers = actions.payload;
       state.isDataLoaded = true;
     })
-    .addCase(loadItemOffer, (state, actions) => {
+    .addCase(setItemOffer, (state, actions) => {
       state.itemOffer = actions.payload;
     })
     .addCase(loadOfferComments, (state, actions) => {

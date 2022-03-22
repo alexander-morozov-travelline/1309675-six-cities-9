@@ -5,7 +5,7 @@ import {
   requireAuthorization,
   redirectToRoute,
   loadOffers,
-  loadItemOffer,
+  setItemOffer,
   loadOfferComments,
   loadNearOffers
 } from './action';
@@ -14,7 +14,7 @@ import {errorHandle} from '../services/error-handle';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import {Comments, Offer, Offers} from '../types/offer';
+import {CommentData, Comments, Offer, Offers} from '../types/offer';
 
 export const fetchOffersAction = createAsyncThunk(
   'data/fetchOffers',
@@ -33,9 +33,9 @@ export const fetchOfferDataAction = createAsyncThunk(
   async (id: string) => {
     try {
       const {data} = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
-      store.dispatch(loadItemOffer(data));
+      store.dispatch(setItemOffer(data));
     } catch (error) {
-      store.dispatch(loadItemOffer(null));
+      store.dispatch(setItemOffer(null));
       errorHandle(error);
     }
 
@@ -92,6 +92,23 @@ export const logoutAction = createAsyncThunk(
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     } catch (error) {
       errorHandle(error);
+    }
+  },
+);
+
+export const sendCommentAction = createAsyncThunk(
+  'comment/send',
+  async ({commentDataForm, hotelId}: CommentData) => {
+    try {
+      const sendData = {
+        comment: commentDataForm.review,
+        rating: commentDataForm.rating,
+      };
+      const {data} = await api.post<Comments>(`${APIRoute.Comments}/${hotelId}`, sendData);
+      store.dispatch(loadOfferComments(data));
+    } catch (error) {
+      errorHandle(error);
+      store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
   },
 );
