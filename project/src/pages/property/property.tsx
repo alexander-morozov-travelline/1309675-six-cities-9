@@ -8,7 +8,7 @@ import Map from '../../components/map/map';
 import {getOfferTypeTitle, getPointsFromOffers, getStyleWidthByRating} from '../../utils';
 import NearPlaces from '../../components/near-places/near-places';
 import {useEffect, useState} from 'react';
-import {fetchItemOfferAction} from '../../store/api-actions';
+import {fetchOfferDataAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {State} from '../../types/state';
 import NotFound from '../not-found/not-found';
@@ -24,11 +24,11 @@ function Property(propertyProps: PropertyProps) {
   const {id=null} = useParams<{id: string}>();
   const points = getPointsFromOffers(offers);
   const [activeOffer, setActiveOffer] = useState<null|number>(null);
-  const {itemOffer: offer} = useAppSelector((state: State) => state);
+  const {itemOffer: offer, comments, nearOffers} = useAppSelector((state: State) => state);
 
   useEffect( () => {
     if(id) {
-      dispatch(fetchItemOfferAction(id));
+      dispatch(fetchOfferDataAction(id));
     }
   }, [id, dispatch]);
 
@@ -146,7 +146,7 @@ function Property(propertyProps: PropertyProps) {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <NearPlaces offerList={offers} setActiveOffer={setActiveOffer}/>
+            <NearPlaces offerList={nearOffers} setActiveOffer={setActiveOffer}/>
           </section>
         </div>
       </main>

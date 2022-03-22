@@ -1,13 +1,20 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {api} from '../store';
 import {store} from '../store';
-import {requireAuthorization, redirectToRoute, loadOffers, loadItemOffer} from './action';
+import {
+  requireAuthorization,
+  redirectToRoute,
+  loadOffers,
+  loadItemOffer,
+  loadOfferComments,
+  loadNearOffers
+} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import {Offer, Offers} from '../types/offer';
+import {Comments, Offer, Offers} from '../types/offer';
 
 export const fetchOffersAction = createAsyncThunk(
   'data/fetchOffers',
@@ -21,14 +28,28 @@ export const fetchOffersAction = createAsyncThunk(
   },
 );
 
-export const fetchItemOfferAction = createAsyncThunk(
-  'data/fetchItemOffer',
+export const fetchOfferDataAction = createAsyncThunk(
+  'data/fetchOfferDataAction',
   async (id: string) => {
     try {
       const {data} = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
       store.dispatch(loadItemOffer(data));
     } catch (error) {
       store.dispatch(loadItemOffer(null));
+      errorHandle(error);
+    }
+
+    try {
+      api.get<Comments>(`${APIRoute.Comments}/${id}`).then( ({data}) => store.dispatch(loadOfferComments(data)) );
+    } catch (error) {
+      store.dispatch(loadOfferComments([] as Comments));
+      errorHandle(error);
+    }
+
+    try {
+      api.get(`${APIRoute.Offers}/${id}/nearby`).then( ({data}) => store.dispatch(loadNearOffers(data)) );
+    } catch (error) {
+      store.dispatch(loadNearOffers([] as Offers));
       errorHandle(error);
     }
   },
