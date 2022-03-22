@@ -16,34 +16,34 @@ export enum AuthorizationStatus {
 
 type Rate = {
   id: string,
-  value: string,
+  value: number,
   title: string,
 }
 
 export const RateList: Rate[] = [
   {
     id: '5-stars',
-    value: '5',
+    value: 5,
     title: 'perfect',
   },
   {
     id: '4-stars',
-    value: '4',
+    value: 4,
     title: 'good',
   },
   {
     id: '3-stars',
-    value: '3',
+    value: 3,
     title: 'not bad',
   },
   {
     id: '2-stars',
-    value: '2',
+    value: 2,
     title: 'badly',
   },
   {
     id: '1-stars',
-    value: '1',
+    value: 1,
     title: 'terribly',
   },
 ];
@@ -166,3 +166,10 @@ export enum APIRoute {
   Logout = '/logout',
   Offers = '/hotels',
 }
+
+export const OfferTypeTitle = new Map([
+  ['apartment', 'Apartment'],
+  ['room', 'Private Room'],
+  ['house', 'House'],
+  ['hotel', 'Hotel'],
+]);

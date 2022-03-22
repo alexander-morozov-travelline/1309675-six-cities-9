@@ -64,3 +64,12 @@ export type Comment = {
 };
 
 export type Comments = Comment[];
+
+export type CommentDataForm = {
+  rating: number | null,
+  review: string,
+}
+export type CommentData = {
+  hotelId: number,
+  commentDataForm: CommentDataForm,
+}

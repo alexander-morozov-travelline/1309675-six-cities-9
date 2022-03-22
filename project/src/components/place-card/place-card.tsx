@@ -2,7 +2,7 @@ import { Offer } from '../../types/offer';
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {getStyleWidthByRating} from '../../utils';
+import {getOfferTypeTitle, getStyleWidthByRating} from '../../utils';
 
 type OfferProps = {
   offer: Offer,
@@ -48,7 +48,7 @@ function PlaceCard(offerProps: OfferProps) {
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{getOfferTypeTitle(type)}</p>
       </div>
     </article>
   );
