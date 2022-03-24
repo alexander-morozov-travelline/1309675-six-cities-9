@@ -9,11 +9,11 @@ import NearPlaces from '../../components/near-places/near-places';
 import {useEffect, useState} from 'react';
 import {fetchOfferDataAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
-import {State} from '../../types/state';
 import NotFound from '../not-found/not-found';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import {AuthorizationStatus} from '../../const';
-import {loadNearOffers, loadOfferComments, setItemOffer} from '../../store/action';
+import {loadNearOffers, setItemOffer} from '../../store/offers-data/offers-data';
+import {loadOfferComments} from '../../store/comments-data/comments-data';
 
 type PropertyProps = {
   offers: Offers,
@@ -25,12 +25,10 @@ function Property(propertyProps: PropertyProps) {
   const {id=null} = useParams<{id: string}>();
   const points = getPointsFromOffers(offers);
   const [activeOffer, setActiveOffer] = useState<null|number>(null);
-  const {
-    itemOffer: offer,
-    comments,
-    nearOffers,
-    authorizationStatus,
-  } = useAppSelector((state: State) => state);
+
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const {itemOffer: offer, nearOffers} = useAppSelector(({OFFERS}) => OFFERS);
+  const {comments} = useAppSelector(({COMMENTS}) => COMMENTS);
 
   useEffect( () => {
     if(id) {

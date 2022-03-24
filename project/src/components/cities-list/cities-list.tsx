@@ -1,7 +1,7 @@
 import { useAppDispatch } from '../../hooks/hooks';
-import { setCity } from '../../store/action';
 import {City} from '../../types/offer';
 import {CitiesList} from '../../const';
+import {setCity} from '../../store/offers-data/offers-data';
 
 type CityListProps = {
   city: City

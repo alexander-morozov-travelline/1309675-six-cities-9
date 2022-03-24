@@ -1,10 +1,9 @@
 import Header from '../../components/header/header';
 import LoginForm from '../../components/login-form/login-form';
 import {useAppSelector} from '../../hooks/hooks';
-import {State} from '../../types/state';
 
 function Login(): JSX.Element {
-  const {city} = useAppSelector((state: State) => state);
+  const {city} = useAppSelector(({OFFERS}) => OFFERS);
   return (
     <div className="page page--gray page--login">
       <Header isLoginPage />

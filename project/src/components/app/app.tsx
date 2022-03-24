@@ -8,19 +8,14 @@ import NotFound from '../../pages/not-found/not-found';
 import Login from '../../pages/login/login';
 import PrivateRoute from '../private-route/private-route';
 import Favorites from '../../pages/favorites/favorites';
-import {State} from '../../types/state';
 import {useAppSelector} from '../../hooks/hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
 import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
 
 function App(): JSX.Element {
-  const {
-    authorizationStatus,
-    isDataLoaded,
-    offers,
-    city,
-  } = useAppSelector((state: State) => state);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const {isDataLoaded, offers, city} = useAppSelector(({OFFERS}) => OFFERS);
 
   if(!isDataLoaded) {
     return (<LoadingScreen />);
