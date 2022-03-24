@@ -25,7 +25,7 @@ function App(): JSX.Element {
     <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Root} element={<Layout />}>
-          <Route index element={<MainPage offers={offers} city={city}/>} />
+          <Route index element={<MainPage />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.ItemOffer} element={<Property offers={offers} />} />
           <Route path={AppRoute.Favorites} element={

@@ -175,7 +175,7 @@ export const OfferTypeTitle = new Map([
 ]);
 
 export enum NameSpace {
-  offers = 'OFFERS',
-  comments = 'COMMENTS',
-  user = 'USER',
+  Offers = 'OFFERS',
+  Comments = 'COMMENTS',
+  User = 'USER',
 }
