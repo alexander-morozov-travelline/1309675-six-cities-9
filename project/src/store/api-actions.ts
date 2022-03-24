@@ -1,14 +1,10 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {api} from '../store';
 import {store} from '../store';
-import {
-  requireAuthorization,
-  redirectToRoute,
-  loadOffers,
-  setItemOffer,
-  loadOfferComments,
-  loadNearOffers
-} from './action';
+import {redirectToRoute} from './action';
+import {requireAuthorization} from './user-process/user-process';
+import {loadOffers, setItemOffer, loadNearOffers} from './offers-data/offers-data';
+import {loadOfferComments} from './comments-data/comments-data';
 import {saveToken, dropToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';

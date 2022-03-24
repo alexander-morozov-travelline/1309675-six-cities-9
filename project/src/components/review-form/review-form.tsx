@@ -1,7 +1,6 @@
 import {useState, Fragment, FormEvent, ChangeEvent} from 'react';
 import {RateList} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
-import {State} from '../../types/state';
 import {CommentDataForm} from '../../types/offer';
 import {sendCommentAction} from '../../store/api-actions';
 
@@ -9,7 +8,7 @@ function ReviewForm(): JSX.Element | null {
   const dispatch = useAppDispatch();
   const initState: CommentDataForm = {rating: null, review: ''};
   const [formData, setFormData] = useState(initState);
-  const {itemOffer: offer} = useAppSelector((state: State) => state);
+  const {itemOffer: offer} = useAppSelector(({OFFERS}) => OFFERS);
 
   if(!offer) {
     return null;
