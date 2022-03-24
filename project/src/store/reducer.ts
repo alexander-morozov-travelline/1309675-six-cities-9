@@ -4,7 +4,6 @@ import {
   loadNearOffers,
   loadOfferComments,
   loadOffers,
-  requireAuthorization,
   setCity
 } from './action';
 import {AuthorizationStatus, DEFAULT_CITY} from '../const';
@@ -17,7 +16,6 @@ const initialState = {
   nearOffers: [] as Offers,
   comments: [] as Comments,
   isDataLoaded: false,
-  authorizationStatus: AuthorizationStatus.Unknown as AuthorizationStatus,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -37,9 +35,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadNearOffers, (state, actions) => {
       state.nearOffers = actions.payload;
-    })
-    .addCase(requireAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload;
     });
 
 });

@@ -173,3 +173,9 @@ export const OfferTypeTitle = new Map([
   ['house', 'House'],
   ['hotel', 'Hotel'],
 ]);
+
+export enum NameSpace {
+  data = 'DATA',
+  game = 'GAME',
+  user = 'USER',
+}
