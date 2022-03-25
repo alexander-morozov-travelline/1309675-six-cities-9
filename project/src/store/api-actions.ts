@@ -3,14 +3,14 @@ import {api} from '../store';
 import {store} from '../store';
 import {redirectToRoute} from './action';
 import {requireAuthorization} from './user-process/user-process';
-import {loadOffers, setItemOffer, loadNearOffers} from './offers-data/offers-data';
+import {loadOffers, setItemOffer, loadNearOffers, loadFavorites, updateItemOffer} from './offers-data/offers-data';
 import {loadOfferComments} from './comments-data/comments-data';
 import {saveToken, dropToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
-import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
+import {APIRoute, AuthorizationStatus, AppRoute, FavoriteStatus} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import {CommentData, Comments, Offer, Offers} from '../types/offer';
+import {CommentData, Comments, FavoriteSetData, Offer, Offers} from '../types/offer';
 
 export const fetchOffersAction = createAsyncThunk(
   'data/fetchOffers',
@@ -105,6 +105,30 @@ export const sendCommentAction = createAsyncThunk(
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    }
+  },
+);
+
+export const fetchFavoritesAction = createAsyncThunk(
+  'data/fetchFavorites',
+  async () => {
+    try {
+      const {data} = await api.get<Offers>(APIRoute.Favorites);
+      store.dispatch(loadFavorites(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const setFavoriteAction = createAsyncThunk(
+  'data/fetchFavorites',
+  async ({hotelId, status}: FavoriteSetData) => {
+    try {
+      const {data} = await api.get<Offer>(`APIRoute.Favorites/${hotelId}/${status}`);
+      store.dispatch(updateItemOffer(data));
+    } catch (error) {
+      errorHandle(error);
     }
   },
 );

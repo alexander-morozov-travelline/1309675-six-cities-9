@@ -7,6 +7,7 @@ const initialState: OffersData = {
   offers: [],
   itemOffer: undefined,
   nearOffers: [],
+  favorites: [],
   isDataLoaded: false,
 };
 
@@ -27,8 +28,14 @@ export const offersData = createSlice({
     loadNearOffers: (state, actions) => {
       state.nearOffers = actions.payload;
     },
+    loadFavorites: (state, actions) => {
+      state.favorites = actions.payload;
+    },
+    updateItemOffer: (state, actions) => {
+      console.log(state.offers);
+    }
   },
 });
 
-export const {setCity, loadOffers, setItemOffer, loadNearOffers} = offersData.actions;
+export const {setCity, loadOffers, setItemOffer, loadNearOffers, loadFavorites, updateItemOffer} = offersData.actions;
 

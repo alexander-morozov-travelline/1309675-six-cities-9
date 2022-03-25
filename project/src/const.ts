@@ -179,3 +179,8 @@ export enum NameSpace {
   Comments = 'COMMENTS',
   User = 'USER',
 }
+
+export enum FavoriteStatus {
+  NOT_FAVORITE = 0,
+  FAVORITE = 1,
+}

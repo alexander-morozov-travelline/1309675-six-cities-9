@@ -15,6 +15,7 @@ export type OffersData = {
   offers: Offers,
   itemOffer: Offer|null|undefined,
   nearOffers: Offers,
+  favorites: Offers,
   isDataLoaded: boolean,
 }
 

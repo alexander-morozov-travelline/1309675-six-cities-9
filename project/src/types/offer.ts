@@ -1,3 +1,5 @@
+import {FavoriteStatus} from '../const';
+
 export type Location = {
   latitude: number,
   longitude: number,
@@ -72,4 +74,9 @@ export type CommentDataForm = {
 export type CommentData = {
   hotelId: number,
   commentDataForm: CommentDataForm,
+}
+
+export type FavoriteSetData = {
+  hotelId: number,
+  status: FavoriteStatus,
 }
