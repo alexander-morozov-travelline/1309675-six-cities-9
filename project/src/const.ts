@@ -1,4 +1,4 @@
-import {City} from './types/offer';
+import {BookmarkType, City} from './types/offer';
 
 export enum AppRoute {
   Root = '/',
@@ -184,3 +184,16 @@ export enum FavoriteStatus {
   NOT_FAVORITE = 0,
   FAVORITE = 1,
 }
+
+export const BookmarkTypeList: BookmarkType = {
+  placeCard: {
+    class: 'place-card',
+    width: 18,
+    height: 19,
+  },
+  property:  {
+    class: 'property',
+    width: 31,
+    height: 33,
+  },
+};

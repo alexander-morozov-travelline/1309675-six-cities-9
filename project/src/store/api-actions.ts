@@ -7,7 +7,7 @@ import {loadOffers, setItemOffer, loadNearOffers, loadFavorites, updateItemOffer
 import {loadOfferComments} from './comments-data/comments-data';
 import {saveToken, dropToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
-import {APIRoute, AuthorizationStatus, AppRoute, FavoriteStatus} from '../const';
+import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {CommentData, Comments, FavoriteSetData, Offer, Offers} from '../types/offer';
@@ -125,7 +125,7 @@ export const setFavoriteAction = createAsyncThunk(
   'data/fetchFavorites',
   async ({hotelId, status}: FavoriteSetData) => {
     try {
-      const {data} = await api.get<Offer>(`APIRoute.Favorites/${hotelId}/${status}`);
+      const {data} = await api.post<Offer>(`${APIRoute.Favorites}/${hotelId}/${status}`);
       store.dispatch(updateItemOffer(data));
     } catch (error) {
       errorHandle(error);

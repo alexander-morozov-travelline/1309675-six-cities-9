@@ -15,7 +15,7 @@ import HistoryRouter from '../history-route/history-route';
 
 function App(): JSX.Element {
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
-  const {isDataLoaded, offers, city} = useAppSelector(({OFFERS}) => OFFERS);
+  const {isDataLoaded, offers} = useAppSelector(({OFFERS}) => OFFERS);
 
   if(!isDataLoaded) {
     return (<LoadingScreen />);

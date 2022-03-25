@@ -1,4 +1,3 @@
-import {City} from '../../types/offer';
 import Header from '../../components/header/header';
 import CityList from '../../components/cities-list/cities-list';
 import MainContent from '../../components/main-content/main-content';

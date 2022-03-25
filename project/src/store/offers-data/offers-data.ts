@@ -32,8 +32,8 @@ export const offersData = createSlice({
       state.favorites = actions.payload;
     },
     updateItemOffer: (state, actions) => {
-      console.log(state.offers);
-    }
+      state.itemOffer = actions.payload;
+    },
   },
 });
 
