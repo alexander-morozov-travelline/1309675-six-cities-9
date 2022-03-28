@@ -10,7 +10,7 @@ import {errorHandle} from '../services/error-handle';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import {CommentData, Comments, FavoriteSetData, Offer, Offers, User} from '../types/offer';
+import {CommentData, Comments, FavoriteSetData, Offer, Offers} from '../types/offer';
 
 export const fetchOffersAction = createAsyncThunk(
   'data/fetchOffers',
@@ -56,9 +56,8 @@ export const checkAuthAction = createAsyncThunk(
   async () => {
     try {
       const {data} = await api.get<UserData>(APIRoute.Login);
-      const user: User = data;
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      store.dispatch(setUser(user));
+      store.dispatch(setUser(data));
     } catch(error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
@@ -71,11 +70,9 @@ export const loginAction = createAsyncThunk(
   async ({login: email, password}: AuthData) => {
     try {
       const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
-      const user: User = data;
-
       saveToken(data.token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      store.dispatch(setUser(user));
+      store.dispatch(setUser(data));
       store.dispatch(redirectToRoute(AppRoute.Root));
     } catch (error) {
       errorHandle(error);

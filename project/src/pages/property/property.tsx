@@ -1,7 +1,7 @@
 import Header from '../../components/header/header';
 import ReviewForm from '../../components/review-form/review-form';
 import {useParams} from 'react-router-dom';
-import {Comments, Offers} from '../../types/offer';
+import {Offers} from '../../types/offer';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import {getOfferTypeTitle, getPointsFromOffers, getStyleWidthByRating} from '../../utils';
@@ -37,8 +37,8 @@ function Property(propertyProps: PropertyProps) {
     }
     return () => {
       dispatch(setItemOffer(undefined));
-      dispatch(loadOfferComments([] as Comments));
-      dispatch(loadNearOffers([] as Offers));
+      dispatch(loadOfferComments([]));
+      dispatch(loadNearOffers([]));
     };
   }, [id, dispatch]);
 

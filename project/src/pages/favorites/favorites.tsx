@@ -1,4 +1,3 @@
-import {Offers} from '../../types/offer';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import {useEffect} from 'react';
@@ -17,7 +16,7 @@ function Favorites(): JSX.Element {
   useEffect( () => {
     dispatch(fetchFavoritesAction());
     return () => {
-      dispatch(loadFavorites([] as Offers));
+      dispatch(loadFavorites([]));
     };
   }, [dispatch]);
 
