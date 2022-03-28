@@ -15,7 +15,7 @@ import HistoryRouter from '../history-route/history-route';
 
 function App(): JSX.Element {
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
-  const {isDataLoaded, offers, city} = useAppSelector(({OFFERS}) => OFFERS);
+  const {isDataLoaded, offers} = useAppSelector(({OFFERS}) => OFFERS);
 
   if(!isDataLoaded) {
     return (<LoadingScreen />);
@@ -25,12 +25,12 @@ function App(): JSX.Element {
     <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Root} element={<Layout />}>
-          <Route index element={<MainPage offers={offers} city={city}/>} />
+          <Route index element={<MainPage />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.ItemOffer} element={<Property offers={offers} />} />
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <Favorites offers={offers} />
+              <Favorites />
             </PrivateRoute>
           }
           />

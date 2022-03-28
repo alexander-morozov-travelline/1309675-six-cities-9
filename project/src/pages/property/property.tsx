@@ -1,7 +1,7 @@
 import Header from '../../components/header/header';
 import ReviewForm from '../../components/review-form/review-form';
 import {useParams} from 'react-router-dom';
-import {Comments, Offers} from '../../types/offer';
+import {Offers} from '../../types/offer';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import {getOfferTypeTitle, getPointsFromOffers, getStyleWidthByRating} from '../../utils';
@@ -14,6 +14,7 @@ import LoadingScreen from '../../components/loading-screen/loading-screen';
 import {AuthorizationStatus} from '../../const';
 import {loadNearOffers, setItemOffer} from '../../store/offers-data/offers-data';
 import {loadOfferComments} from '../../store/comments-data/comments-data';
+import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 
 type PropertyProps = {
   offers: Offers,
@@ -36,8 +37,8 @@ function Property(propertyProps: PropertyProps) {
     }
     return () => {
       dispatch(setItemOffer(undefined));
-      dispatch(loadOfferComments([] as Comments));
-      dispatch(loadNearOffers([] as Offers));
+      dispatch(loadOfferComments([]));
+      dispatch(loadNearOffers([]));
     };
   }, [id, dispatch]);
 
@@ -78,12 +79,7 @@ function Property(propertyProps: PropertyProps) {
               }
               <div className="property__name-wrapper">
                 <h1 className="property__name">{offer.title}</h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <BookmarkButton offer={offer} isPropertyBookmark />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">

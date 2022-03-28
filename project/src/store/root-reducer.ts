@@ -5,7 +5,7 @@ import {offersData} from './offers-data/offers-data';
 import {commentsData} from './comments-data/comments-data';
 
 export const rootReducer = combineReducers({
-  [NameSpace.offers]: offersData.reducer,
-  [NameSpace.comments]: commentsData.reducer,
-  [NameSpace.user]: userProcess.reducer,
+  [NameSpace.Offers]: offersData.reducer,
+  [NameSpace.Comments]: commentsData.reducer,
+  [NameSpace.User]: userProcess.reducer,
 });

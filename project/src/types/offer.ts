@@ -1,3 +1,5 @@
+import {FavoriteStatus} from '../const';
+
 export type Location = {
   latitude: number,
   longitude: number,
@@ -50,6 +52,7 @@ export type Points = Point[];
 
 export type User = {
   avatarUrl: string,
+  email: string | null,
   id: number,
   isPro: boolean,
   name: string,
@@ -72,4 +75,20 @@ export type CommentDataForm = {
 export type CommentData = {
   hotelId: number,
   commentDataForm: CommentDataForm,
+}
+
+export type FavoriteSetData = {
+  hotelId: number,
+  status: FavoriteStatus,
+}
+
+export type BookmarkTypeItem = {
+  class: string,
+  width: number,
+  height: number,
+}
+
+export type BookmarkType = {
+  placeCard: BookmarkTypeItem,
+  property: BookmarkTypeItem,
 }

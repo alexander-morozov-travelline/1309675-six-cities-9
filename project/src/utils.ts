@@ -60,3 +60,17 @@ export const getOfferTypeTitle = (type: string): string | null => {
   const offerTypeTitle = OfferTypeTitle.get(type);
   return offerTypeTitle ? offerTypeTitle : null;
 };
+
+export const updateItemOfferOnList = (offer: Offer, offerList: Offers) => {
+  const index = offerList.findIndex((item: Offer) => item.id === offer.id);
+  return index === -1
+    ? offerList
+    : [...offerList.slice(0, index), offer, ...offerList.slice(index + 1)];
+};
+
+export const deleteItemOfferOnList = (offer: Offer, offerList: Offers) => {
+  const index = offerList.findIndex((item: Offer) => item.id === offer.id);
+  return index === -1
+    ? offerList
+    : [...offerList.slice(0, index), ...offerList.slice(index + 1)];
+};
