@@ -52,6 +52,7 @@ export type Points = Point[];
 
 export type User = {
   avatarUrl: string,
+  email: string | null,
   id: number,
   isPro: boolean,
   name: string,

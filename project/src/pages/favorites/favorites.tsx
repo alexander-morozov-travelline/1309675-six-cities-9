@@ -1,29 +1,30 @@
-import {Offer} from '../../types/offer';
-import FavoritesList from '../../components/favorites-list/favorites-list';
-import {groupOffersByCity} from '../../utils';
+import {Offers} from '../../types/offer';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
+import {useEffect} from 'react';
+import {fetchFavoritesAction} from '../../store/api-actions';
+import {loadFavorites} from '../../store/offers-data/offers-data';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
+import FavoritesContent from '../../components/favorites-content/favorites-content';
+import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 
-type FavoritesProps = {
-  offers: Offer[],
-}
 
-function Favorites(favoritesProps: FavoritesProps): JSX.Element {
-  const {offers} = favoritesProps;
-  const offersGroupByCity = groupOffersByCity(offers);
+function Favorites(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const {favorites} = useAppSelector(({OFFERS}) => OFFERS);
+
+
+  useEffect( () => {
+    dispatch(fetchFavoritesAction());
+    return () => {
+      dispatch(loadFavorites([] as Offers));
+    };
+  }, [dispatch]);
 
   return (
     <div className="page">
       <Header />
-
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList offersGroupByCity={offersGroupByCity}/>
-          </section>
-        </div>
-      </main>
+      { favorites.length ? <FavoritesContent favorites={favorites} /> : <FavoritesEmpty  />}
       <Footer/>
     </div>
   );

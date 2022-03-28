@@ -2,7 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {api} from '../store';
 import {store} from '../store';
 import {redirectToRoute} from './action';
-import {requireAuthorization} from './user-process/user-process';
+import {requireAuthorization, setUser} from './user-process/user-process';
 import {loadOffers, setItemOffer, loadNearOffers, loadFavorites, updateItemOffer} from './offers-data/offers-data';
 import {loadOfferComments} from './comments-data/comments-data';
 import {saveToken, dropToken} from '../services/token';
@@ -10,7 +10,7 @@ import {errorHandle} from '../services/error-handle';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import {CommentData, Comments, FavoriteSetData, Offer, Offers} from '../types/offer';
+import {CommentData, Comments, FavoriteSetData, Offer, Offers, User} from '../types/offer';
 
 export const fetchOffersAction = createAsyncThunk(
   'data/fetchOffers',
@@ -55,8 +55,10 @@ export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
   async () => {
     try {
-      await api.get(APIRoute.Login);
+      const {data} = await api.get<UserData>(APIRoute.Login);
+      const user: User = data;
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      store.dispatch(setUser(user));
     } catch(error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
@@ -68,9 +70,12 @@ export const loginAction = createAsyncThunk(
   'user/login',
   async ({login: email, password}: AuthData) => {
     try {
-      const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
-      saveToken(token);
+      const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+      const user: User = data;
+
+      saveToken(data.token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      store.dispatch(setUser(user));
       store.dispatch(redirectToRoute(AppRoute.Root));
     } catch (error) {
       errorHandle(error);
@@ -86,6 +91,7 @@ export const logoutAction = createAsyncThunk(
       await api.delete(APIRoute.Logout);
       dropToken();
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      store.dispatch(setUser(null));
     } catch (error) {
       errorHandle(error);
     }
@@ -125,8 +131,8 @@ export const setFavoriteAction = createAsyncThunk(
   'data/fetchFavorites',
   async ({hotelId, status}: FavoriteSetData) => {
     try {
-      const {data} = await api.post<Offer>(`${APIRoute.Favorites}/${hotelId}/${status}`);
-      store.dispatch(updateItemOffer(data));
+      const {data: offer} = await api.post<Offer>(`${APIRoute.Favorites}/${hotelId}/${status}`);
+      store.dispatch(updateItemOffer(offer));
     } catch (error) {
       errorHandle(error);
     }

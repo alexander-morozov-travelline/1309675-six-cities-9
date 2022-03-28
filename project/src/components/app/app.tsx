@@ -30,7 +30,7 @@ function App(): JSX.Element {
           <Route path={AppRoute.ItemOffer} element={<Property offers={offers} />} />
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <Favorites offers={offers} />
+              <Favorites />
             </PrivateRoute>
           }
           />
