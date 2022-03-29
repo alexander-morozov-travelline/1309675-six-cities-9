@@ -1,7 +1,7 @@
 import {Offer} from '../../types/offer';
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, BookmarkType} from '../../const';
 import BookmarkButton from '../bookmark-button/bookmark-button';
 
 type FavoriteCardProps = {
@@ -31,7 +31,7 @@ function FavoriteCard(favoriteCardProps: FavoriteCardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton offer={offer}/>
+          <BookmarkButton offer={offer} width={18} height={19} type={BookmarkType.PlaceCard}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

@@ -11,7 +11,7 @@ import {fetchOfferDataAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import NotFound from '../not-found/not-found';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, BookmarkType} from '../../const';
 import {loadNearOffers, setItemOffer} from '../../store/offers-data/offers-data';
 import {loadOfferComments} from '../../store/comments-data/comments-data';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
@@ -79,7 +79,7 @@ function Property(propertyProps: PropertyProps) {
               }
               <div className="property__name-wrapper">
                 <h1 className="property__name">{offer.title}</h1>
-                <BookmarkButton offer={offer} isPropertyBookmark />
+                <BookmarkButton offer={offer} width={31} height={33} type={BookmarkType.Property} />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
