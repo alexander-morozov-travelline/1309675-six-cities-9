@@ -189,3 +189,6 @@ export enum BookmarkType {
   PlaceCard = 'place-card',
   Property  = 'property',
 }
+
+export const MIN_COMMENT_LENGTH = 50;
+export const MAX_COMMENT_COUNT = 10;

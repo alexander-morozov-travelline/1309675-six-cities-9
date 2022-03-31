@@ -3,17 +3,24 @@ import ReviewForm from '../../components/review-form/review-form';
 import {useParams} from 'react-router-dom';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
-import {getOfferTypeTitle, getPointFromOffer, getPointsFromOffers, getStyleWidthByRating} from '../../utils';
+import {
+  getOfferTypeTitle,
+  getPointFromOffer,
+  getPointsFromOffers,
+  getStyleWidthByRating,
+  sortCommentDateDown
+} from '../../utils';
 import NearPlaces from '../../components/near-places/near-places';
 import {useEffect} from 'react';
 import {fetchOfferDataAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import NotFound from '../not-found/not-found';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
-import {AuthorizationStatus, BookmarkType} from '../../const';
+import {AuthorizationStatus, BookmarkType, MAX_COMMENT_COUNT} from '../../const';
 import {loadNearOffers, setItemOffer} from '../../store/offers-data/offers-data';
 import {loadOfferComments} from '../../store/comments-data/comments-data';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
+import {Comments} from '../../types/offer';
 
 function Property() {
   const dispatch = useAppDispatch();
@@ -22,6 +29,7 @@ function Property() {
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
   const {itemOffer: offer, nearOffers} = useAppSelector(({OFFERS}) => OFFERS);
   const {comments} = useAppSelector(({COMMENTS}) => COMMENTS);
+  const formattedComments: Comments = [...comments].sort(sortCommentDateDown).slice(0, MAX_COMMENT_COUNT);
 
   useEffect( () => {
     if(id) {
@@ -56,7 +64,7 @@ function Property() {
                 offer.images.map((image, index) =>
                   (
                     <div key={index.toString()} className="property__image-wrapper">
-                      <img className="property__image" src={image} alt="Place image"/>
+                      <img className="property__image" src={image} alt="Place"/>
                     </div>
                   ),
                 )
@@ -127,8 +135,8 @@ function Property() {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
-                <ReviewsList comments={comments} />
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{formattedComments.length}</span></h2>
+                <ReviewsList comments={formattedComments} />
                 {
                   authorizationStatus === AuthorizationStatus.Auth &&
                   <ReviewForm />

@@ -1,4 +1,4 @@
-import {Offers, Offer, OffersGroupByCity, Point} from './types/offer';
+import {Offers, Offer, OffersGroupByCity, Point, Comment} from './types/offer';
 import CSS from 'csstype';
 import dayjs from 'dayjs';
 import {OfferTypeTitle, Sort, SortType} from './const';
@@ -76,3 +76,6 @@ export const deleteItemOfferOnList = (offer: Offer, offerList: Offers) => {
     ? offerList
     : [...offerList.slice(0, index), ...offerList.slice(index + 1)];
 };
+
+export const sortCommentDateDown = (comment1: Comment, comment2: Comment) =>
+  dayjs(comment2.date).diff(dayjs(comment1.date));
