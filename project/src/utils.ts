@@ -79,3 +79,13 @@ export const deleteItemOfferOnList = (offer: Offer, offerList: Offers) => {
 
 export const sortCommentDateDown = (comment1: Comment, comment2: Comment) =>
   dayjs(comment2.date).diff(dayjs(comment1.date));
+
+export const isEmailCorrect = (email: string): boolean => {
+  const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  return regex.test(email);
+};
+
+export const isPasswordCorrect = (password: string): boolean => {
+  const regex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z@#$%^&*_]+$/;
+  return regex.test(password);
+};

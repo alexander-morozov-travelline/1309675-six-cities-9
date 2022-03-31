@@ -2,6 +2,7 @@ import {useAppDispatch} from '../../hooks/hooks';
 import {FormEvent, useRef} from 'react';
 import {AuthData} from '../../types/auth-data';
 import {loginAction} from '../../store/api-actions';
+import {isEmailCorrect, isPasswordCorrect} from '../../utils';
 
 function LoginForm():JSX.Element {
   const dispatch = useAppDispatch();
@@ -9,7 +10,9 @@ function LoginForm():JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const onSubmit = (authData: AuthData) => {
-    dispatch(loginAction(authData));
+    if(isEmailCorrect(authData.login) && isPasswordCorrect(authData.password)) {
+      dispatch(loginAction(authData));
+    }
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
