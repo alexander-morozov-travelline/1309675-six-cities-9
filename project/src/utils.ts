@@ -25,14 +25,16 @@ export const getStyleWidthByRating = (rating: number): CSS.Properties => ({width
 
 export const getFormattedDate = (date: dayjs.ConfigType, format: string) => dayjs(date).format(format);
 
-export const getPointsFromOffers = (offers: Offers) => offers.map((offer: Offer): Point => (
+export const getPointFromOffer = (offer: Offer): Point => (
   {
     id: offer.id,
     title: offer.title,
     latitude: offer.location.latitude,
     longitude: offer.location.longitude,
   }
-));
+);
+
+export const getPointsFromOffers = (offers: Offers) => offers.map((offer: Offer) => getPointFromOffer(offer));
 
 export const sortRatingDown = (offer1: Offer, offer2: Offer) =>
   offer1.rating < offer2.rating ? 1 : -1;
