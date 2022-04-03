@@ -1,7 +1,7 @@
-import {Offers, Offer, OffersGroupByCity, Point, Comment} from './types/offer';
+import {Offers, Offer, OffersGroupByCity, Point, Comment} from '../types/offer';
 import CSS from 'csstype';
 import dayjs from 'dayjs';
-import {OfferTypeTitle, Sort, SortType} from './const';
+import {OfferTypeTitle, Sort, SortType} from '../const';
 
 export const groupOffersByCity = (offers: Offers): OffersGroupByCity => {
   const offersGroupByCityObj: {[property: string]: Offers} = {};
@@ -89,3 +89,7 @@ export const isPasswordCorrect = (password: string): boolean => {
   const regex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z@#$%^&*_]+$/;
   return regex.test(password);
 };
+
+export function getRandValFromArray(items: Array<unknown>) {
+  return items[Math.floor(Math.random()*items.length)];
+}

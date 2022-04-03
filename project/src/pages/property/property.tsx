@@ -9,7 +9,7 @@ import {
   getPointsFromOffers,
   getStyleWidthByRating,
   sortCommentDateDown
-} from '../../utils';
+} from '../../utils/common';
 import NearPlaces from '../../components/near-places/near-places';
 import {useEffect} from 'react';
 import {fetchOfferDataAction} from '../../store/api-actions';
@@ -29,7 +29,10 @@ function Property() {
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
   const {itemOffer: offer, nearOffers} = useAppSelector(({OFFERS}) => OFFERS);
   const {comments} = useAppSelector(({COMMENTS}) => COMMENTS);
-  const formattedComments: Comments = [...comments].sort(sortCommentDateDown).slice(0, MAX_COMMENT_COUNT);
+
+  const formattedComments: Comments = comments
+    ? [...comments].sort(sortCommentDateDown).slice(0, MAX_COMMENT_COUNT)
+    : [];
 
   useEffect( () => {
     if(id) {

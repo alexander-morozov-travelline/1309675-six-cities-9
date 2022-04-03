@@ -2,7 +2,7 @@ import {useAppDispatch} from '../../hooks/hooks';
 import {FormEvent, useRef} from 'react';
 import {AuthData} from '../../types/auth-data';
 import {loginAction} from '../../store/api-actions';
-import {isEmailCorrect, isPasswordCorrect} from '../../utils';
+import {isEmailCorrect, isPasswordCorrect} from '../../utils/common';
 
 function LoginForm():JSX.Element {
   const dispatch = useAppDispatch();

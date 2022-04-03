@@ -115,6 +115,9 @@ export const CitiesList: City[] =  [
   },
 ];
 
+export const CityNames = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export const offerTypes = ['apartment', 'room', 'house', 'hotel'];
 
 export const SortType = {
   POPULAR: 'popular',

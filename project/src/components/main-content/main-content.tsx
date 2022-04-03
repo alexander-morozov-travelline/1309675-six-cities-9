@@ -1,7 +1,7 @@
 import PlacesSorting from '../places-sorting/places-sorting';
 import OfferList from '../offer-list/offer-list';
 import Map from '../map/map';
-import {getPointsFromOffers, getSortedOffers} from '../../utils';
+import {getPointsFromOffers, getSortedOffers} from '../../utils/common';
 import {useState} from 'react';
 import {DEFAULT_SORT, Sort} from '../../const';
 import {City, Offers} from '../../types/offer';
