@@ -26,7 +26,7 @@ function LoginForm():JSX.Element {
     }
   };
   return (
-    <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
+    <form className="login__form form" action="#" method="post" onSubmit={handleSubmit} data-testid="login-form">
       <div className="login__input-wrapper form__input-wrapper">
         <label className="visually-hidden">E-mail</label>
         <input ref={loginRef} className="login__input form__input" type="email" name="email" placeholder="Email" required />

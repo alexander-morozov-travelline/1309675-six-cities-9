@@ -12,7 +12,7 @@ function Header({isLoginPage = false}: HeaderProps): JSX.Element {
   const {user} = useAppSelector(({USER}) => USER);
 
   return (
-    <header className="header">
+    <header className="header" data-testid="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">

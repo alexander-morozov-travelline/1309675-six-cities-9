@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import BookmarkButton from './bookmark-button';
-import {AppRoute, AuthorizationStatus, BookmarkType, DEFAULT_CITY, NameSpace} from '../../const';
+import {AppRoute, AuthorizationStatus, BookmarkType, NameSpace} from '../../const';
 import React from 'react';
 import {makeFakeOffer, makeFakeUser} from '../../utils/mocks';
 import {Provider} from 'react-redux';

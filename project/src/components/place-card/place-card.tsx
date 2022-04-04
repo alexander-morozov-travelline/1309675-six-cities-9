@@ -22,6 +22,7 @@ function PlaceCard(offerProps: OfferProps) {
       className={`${cardPlaceType} place-card`}
       onMouseEnter={ () => onMouseEnter && onMouseEnter(id)}
       onMouseLeave={onMouseLeave && onMouseLeave}
+      data-testid="place-card"
     >
       <div className="place-card__mark" hidden={!isPremium}>
         <span>Premium</span>

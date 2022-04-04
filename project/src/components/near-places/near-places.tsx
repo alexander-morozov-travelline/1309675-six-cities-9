@@ -11,7 +11,7 @@ function NearPlaces(nearPlacesProperties: NearPlacesProperties):JSX.Element {
   const {offerList} = nearPlacesProperties;
 
   return (
-    <div className="near-places__list places__list">
+    <div className="near-places__list places__list" data-testid="near-places">
       {
         offerList.map((offer) =>
           (

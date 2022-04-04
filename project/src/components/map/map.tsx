@@ -1,7 +1,7 @@
 import {useRef, useEffect} from 'react';
 import {Icon, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 import {City, Points} from '../../types/offer';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
@@ -52,7 +52,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, points, selectedPointId]);
 
-  return <div style={{height: '100%'}} ref={mapRef}></div>;
+  return <div style={{height: '100%'}} ref={mapRef} data-testid="map"></div>;
 }
 
 export default Map;
