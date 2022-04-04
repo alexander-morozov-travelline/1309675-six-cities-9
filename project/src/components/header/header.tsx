@@ -10,6 +10,7 @@ type HeaderProps = {
 function Header({isLoginPage = false}: HeaderProps): JSX.Element {
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
   const {user} = useAppSelector(({USER}) => USER);
+
   return (
     <header className="header">
       <div className="container">
@@ -28,7 +29,7 @@ function Header({isLoginPage = false}: HeaderProps): JSX.Element {
                     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                         {
-                          user &&
+                          authorizationStatus === AuthorizationStatus.Auth && user &&
                           <img className="header__avatar user__avatar" src={user.avatarUrl} width="20" height="20" alt="Header avatar" />
                         }
                       </div>
