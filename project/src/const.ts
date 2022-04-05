@@ -1,4 +1,4 @@
-import {BookmarkType, City} from './types/offer';
+import {City} from './types/offer';
 
 export enum AppRoute {
   Root = '/',
@@ -115,6 +115,9 @@ export const CitiesList: City[] =  [
   },
 ];
 
+export const CityNames = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export const offerTypes = ['apartment', 'room', 'house', 'hotel'];
 
 export const SortType = {
   POPULAR: 'popular',
@@ -185,15 +188,10 @@ export enum FavoriteStatus {
   FAVORITE = 1,
 }
 
-export const BookmarkTypeList: BookmarkType = {
-  placeCard: {
-    class: 'place-card',
-    width: 18,
-    height: 19,
-  },
-  property:  {
-    class: 'property',
-    width: 31,
-    height: 33,
-  },
-};
+export enum BookmarkType {
+  PlaceCard = 'place-card',
+  Property  = 'property',
+}
+
+export const MIN_COMMENT_LENGTH = 50;
+export const MAX_COMMENT_COUNT = 10;

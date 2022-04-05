@@ -1,5 +1,5 @@
 import {Comment} from '../../types/offer';
-import {getFormattedDate, getStyleWidthByRating} from '../../utils';
+import {getFormattedDate, getStyleWidthByRating} from '../../utils/common';
 
 type ReviewProperties = {
   comment: Comment,

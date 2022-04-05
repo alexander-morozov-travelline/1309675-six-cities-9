@@ -1,7 +1,7 @@
-import {Offers, Offer, OffersGroupByCity, Point} from './types/offer';
+import {Offers, Offer, OffersGroupByCity, Point, Comment} from '../types/offer';
 import CSS from 'csstype';
 import dayjs from 'dayjs';
-import {OfferTypeTitle, Sort, SortType} from './const';
+import {OfferTypeTitle, Sort, SortType} from '../const';
 
 export const groupOffersByCity = (offers: Offers): OffersGroupByCity => {
   const offersGroupByCityObj: {[property: string]: Offers} = {};
@@ -25,14 +25,16 @@ export const getStyleWidthByRating = (rating: number): CSS.Properties => ({width
 
 export const getFormattedDate = (date: dayjs.ConfigType, format: string) => dayjs(date).format(format);
 
-export const getPointsFromOffers = (offers: Offers) => offers.map((offer: Offer): Point => (
+export const getPointFromOffer = (offer: Offer): Point => (
   {
     id: offer.id,
     title: offer.title,
     latitude: offer.location.latitude,
     longitude: offer.location.longitude,
   }
-));
+);
+
+export const getPointsFromOffers = (offers: Offers) => offers.map((offer: Offer) => getPointFromOffer(offer));
 
 export const sortRatingDown = (offer1: Offer, offer2: Offer) =>
   offer1.rating < offer2.rating ? 1 : -1;
@@ -74,3 +76,20 @@ export const deleteItemOfferOnList = (offer: Offer, offerList: Offers) => {
     ? offerList
     : [...offerList.slice(0, index), ...offerList.slice(index + 1)];
 };
+
+export const sortCommentDateDown = (comment1: Comment, comment2: Comment) =>
+  dayjs(comment2.date).diff(dayjs(comment1.date));
+
+export const isEmailCorrect = (email: string): boolean => {
+  const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  return regex.test(email);
+};
+
+export const isPasswordCorrect = (password: string): boolean => {
+  const regex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z@#$%^&*_]+$/;
+  return regex.test(password);
+};
+
+export function getRandValFromArray(items: Array<unknown>) {
+  return items[Math.floor(Math.random()*items.length)];
+}

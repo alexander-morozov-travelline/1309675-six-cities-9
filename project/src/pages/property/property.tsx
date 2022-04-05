@@ -1,35 +1,38 @@
 import Header from '../../components/header/header';
 import ReviewForm from '../../components/review-form/review-form';
 import {useParams} from 'react-router-dom';
-import {Offers} from '../../types/offer';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
-import {getOfferTypeTitle, getPointsFromOffers, getStyleWidthByRating} from '../../utils';
+import {
+  getOfferTypeTitle,
+  getPointFromOffer,
+  getPointsFromOffers,
+  getStyleWidthByRating,
+  sortCommentDateDown
+} from '../../utils/common';
 import NearPlaces from '../../components/near-places/near-places';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {fetchOfferDataAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import NotFound from '../not-found/not-found';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, BookmarkType, MAX_COMMENT_COUNT} from '../../const';
 import {loadNearOffers, setItemOffer} from '../../store/offers-data/offers-data';
 import {loadOfferComments} from '../../store/comments-data/comments-data';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
+import {Comments} from '../../types/offer';
 
-type PropertyProps = {
-  offers: Offers,
-}
-
-function Property(propertyProps: PropertyProps) {
+function Property() {
   const dispatch = useAppDispatch();
-  const {offers} = propertyProps;
   const {id=null} = useParams<{id: string}>();
-  const points = getPointsFromOffers(offers);
-  const [activeOffer, setActiveOffer] = useState<null|number>(null);
 
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
   const {itemOffer: offer, nearOffers} = useAppSelector(({OFFERS}) => OFFERS);
   const {comments} = useAppSelector(({COMMENTS}) => COMMENTS);
+
+  const formattedComments: Comments = comments
+    ? [...comments].sort(sortCommentDateDown).slice(0, MAX_COMMENT_COUNT)
+    : [];
 
   useEffect( () => {
     if(id) {
@@ -50,6 +53,8 @@ function Property(propertyProps: PropertyProps) {
     return <NotFound />;
   }
 
+  const points = [...getPointsFromOffers(nearOffers), getPointFromOffer(offer)];
+
   return (
     <div className="page">
       <Header />
@@ -62,7 +67,7 @@ function Property(propertyProps: PropertyProps) {
                 offer.images.map((image, index) =>
                   (
                     <div key={index.toString()} className="property__image-wrapper">
-                      <img className="property__image" src={image} alt="Place image"/>
+                      <img className="property__image" src={image} alt="Place"/>
                     </div>
                   ),
                 )
@@ -79,7 +84,7 @@ function Property(propertyProps: PropertyProps) {
               }
               <div className="property__name-wrapper">
                 <h1 className="property__name">{offer.title}</h1>
-                <BookmarkButton offer={offer} isPropertyBookmark />
+                <BookmarkButton offer={offer} width={31} height={33} type={BookmarkType.Property} />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -119,27 +124,22 @@ function Property(propertyProps: PropertyProps) {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74"
+                    <img className="property__avatar user__avatar" src={offer.host.avatarUrl} width="74"
                       height="74" alt="Host avatar"
                     />
                   </div>
-                  <span className="property__user-name">Angelina</span>
-                  <span className="property__user-status">Pro</span>
+                  <span className="property__user-name">{offer.host.name}</span>
+                  {offer.host.isPro && <span className="property__user-status">Pro</span> }
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                    building is green and from 18th century.
-                  </p>
-                  <p className="property__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where
-                    the bustle of the city comes to rest in this alley flowery and colorful.
+                    {offer.description}
                   </p>
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ReviewsList comments={comments} />
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{formattedComments.length}</span></h2>
+                <ReviewsList comments={formattedComments} />
                 {
                   authorizationStatus === AuthorizationStatus.Auth &&
                   <ReviewForm />
@@ -148,13 +148,13 @@ function Property(propertyProps: PropertyProps) {
             </div>
           </div>
           <section className="property__map map">
-            <Map city={offer.city} points={points} selectedPointId={activeOffer} />
+            <Map city={offer.city} points={points} selectedPointId={offer.id} />
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <NearPlaces offerList={nearOffers} setActiveOffer={setActiveOffer}/>
+            <NearPlaces offerList={nearOffers} />
           </section>
         </div>
       </main>

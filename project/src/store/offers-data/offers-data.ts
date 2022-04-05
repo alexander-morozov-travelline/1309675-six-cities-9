@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace, DEFAULT_CITY} from '../../const';
 import {OffersData} from '../../types/state';
-import {deleteItemOfferOnList, updateItemOfferOnList} from '../../utils';
+import {deleteItemOfferOnList, updateItemOfferOnList} from '../../utils/common';
 
 const initialState: OffersData = {
   city: DEFAULT_CITY,

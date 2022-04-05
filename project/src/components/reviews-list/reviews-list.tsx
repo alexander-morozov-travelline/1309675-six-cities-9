@@ -8,7 +8,7 @@ type ReviewsListProperties = {
 function ReviewsList(reviewsListProperties: ReviewsListProperties): JSX.Element {
   const { comments } = reviewsListProperties;
   return (
-    <ul className="reviews__list">
+    <ul className="reviews__list" data-testid="reviews-list">
       {comments.map((comment) => (
         <Review key={comment.id} comment={comment} />
       ))}

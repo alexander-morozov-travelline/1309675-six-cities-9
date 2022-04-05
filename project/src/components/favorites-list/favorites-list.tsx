@@ -9,7 +9,7 @@ type FavoritesListProps = {
 function FavoritesList(favoritesListProps: FavoritesListProps): JSX.Element {
   const {offersGroupByCity} = favoritesListProps;
   return (
-    <ul className="favorites__list">
+    <ul className="favorites__list" data-testid="favorites-list">
       {
         offersGroupByCity.map(
           ({city, offers}) =>

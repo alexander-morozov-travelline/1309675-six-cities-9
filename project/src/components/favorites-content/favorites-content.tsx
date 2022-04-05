@@ -1,5 +1,5 @@
 import {Offers} from '../../types/offer';
-import {groupOffersByCity} from '../../utils';
+import {groupOffersByCity} from '../../utils/common';
 import FavoritesList from '../favorites-list/favorites-list';
 
 type FavoritesContentProps = {

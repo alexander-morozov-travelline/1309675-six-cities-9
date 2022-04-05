@@ -1,5 +1,5 @@
 import {useState, Fragment, FormEvent, ChangeEvent} from 'react';
-import {RateList} from '../../const';
+import {MIN_COMMENT_LENGTH, RateList} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {CommentDataForm} from '../../types/offer';
 import {sendCommentAction} from '../../store/api-actions';
@@ -8,16 +8,19 @@ function ReviewForm(): JSX.Element | null {
   const dispatch = useAppDispatch();
   const initState: CommentDataForm = {rating: null, review: ''};
   const [formData, setFormData] = useState(initState);
+  const [isDisabled, setDisabled] = useState(false);
   const {itemOffer: offer} = useAppSelector(({OFFERS}) => OFFERS);
 
   if(!offer) {
     return null;
   }
 
-  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (evt: FormEvent<HTMLFormElement>) => {
+    setDisabled(true);
     evt.preventDefault();
-    dispatch(sendCommentAction({commentDataForm: formData, hotelId: offer.id}));
+    await dispatch(sendCommentAction({commentDataForm: formData, hotelId: offer.id}));
     setFormData(initState);
+    setDisabled(false);
   };
 
   const handleDataChange = (evt: ChangeEvent<HTMLElement>) => {
@@ -26,7 +29,7 @@ function ReviewForm(): JSX.Element | null {
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit} data-testid="review-form">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
@@ -58,13 +61,18 @@ function ReviewForm(): JSX.Element | null {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formData.review}
         onChange={handleDataChange}
+        disabled={isDisabled}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and
           describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!(formData.rating && formData.review)}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit"
+          disabled={isDisabled || !(formData.rating && formData.review && formData.review.length>MIN_COMMENT_LENGTH)}
+        >
+          Submit
+        </button>
       </div>
     </form>
   );

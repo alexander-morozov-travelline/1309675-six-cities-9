@@ -10,34 +10,30 @@ import PrivateRoute from '../private-route/private-route';
 import Favorites from '../../pages/favorites/favorites';
 import {useAppSelector} from '../../hooks/hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
-import browserHistory from '../../browser-history';
-import HistoryRouter from '../history-route/history-route';
 
 function App(): JSX.Element {
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
-  const {isDataLoaded, offers} = useAppSelector(({OFFERS}) => OFFERS);
+  const {isDataLoaded} = useAppSelector(({OFFERS}) => OFFERS);
 
   if(!isDataLoaded) {
     return (<LoadingScreen />);
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route path={AppRoute.Root} element={<Layout />}>
-          <Route index element={<MainPage />} />
-          <Route path={AppRoute.Login} element={<Login />} />
-          <Route path={AppRoute.ItemOffer} element={<Property offers={offers} />} />
-          <Route path={AppRoute.Favorites} element={
-            <PrivateRoute authorizationStatus={authorizationStatus}>
-              <Favorites />
-            </PrivateRoute>
-          }
-          />
-        </Route>
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-    </HistoryRouter>
+    <Routes>
+      <Route path={AppRoute.Root} element={<Layout />}>
+        <Route index element={<MainPage />} />
+        <Route path={AppRoute.Login} element={<Login />} />
+        <Route path={AppRoute.ItemOffer} element={<Property />} />
+        <Route path={AppRoute.Favorites} element={
+          <PrivateRoute authorizationStatus={authorizationStatus}>
+            <Favorites />
+          </PrivateRoute>
+        }
+        />
+      </Route>
+      <Route path='*' element={<NotFound />} />
+    </Routes>
   );
 }
 

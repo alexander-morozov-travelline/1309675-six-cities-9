@@ -5,21 +5,13 @@ import {CardPlaceType, CardType} from '../../const';
 
 type NearPlacesProperties = {
   offerList: Offers,
-  setActiveOffer: (id: number | null) => void,
 }
 
 function NearPlaces(nearPlacesProperties: NearPlacesProperties):JSX.Element {
-  const {offerList, setActiveOffer} = nearPlacesProperties;
+  const {offerList} = nearPlacesProperties;
 
-  const handleMouseEnter = (id: number): void => {
-    setActiveOffer(id);
-  };
-
-  const handleMouseLeave = (): void => {
-    setActiveOffer(null);
-  };
   return (
-    <div className="near-places__list places__list">
+    <div className="near-places__list places__list" data-testid="near-places">
       {
         offerList.map((offer) =>
           (
@@ -28,8 +20,6 @@ function NearPlaces(nearPlacesProperties: NearPlacesProperties):JSX.Element {
               cardType={CardType.Near}
               cardPlaceType={CardPlaceType.Near}
               offer={offer}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
             />
           ),
         )

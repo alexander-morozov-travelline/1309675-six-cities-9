@@ -81,14 +81,3 @@ export type FavoriteSetData = {
   hotelId: number,
   status: FavoriteStatus,
 }
-
-export type BookmarkTypeItem = {
-  class: string,
-  width: number,
-  height: number,
-}
-
-export type BookmarkType = {
-  placeCard: BookmarkTypeItem,
-  property: BookmarkTypeItem,
-}

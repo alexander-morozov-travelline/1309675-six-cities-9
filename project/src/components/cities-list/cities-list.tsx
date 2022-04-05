@@ -14,7 +14,7 @@ function CityList(cityListProps: CityListProps) {
   const handleClick = (clickedCity: City) => () => dispatch(setCity(clickedCity));
 
   return (
-    <section className="locations container">
+    <section className="locations container" data-testid="cities-list">
       <ul className="locations__list tabs__list">
         {CitiesList.map((item) => {
           const className = `locations__item-link tabs__item${item.name === city.name && ' tabs__item--active'}`;
