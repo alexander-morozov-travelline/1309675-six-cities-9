@@ -1,7 +1,7 @@
-import {Offers, Offer, OffersGroupByCity, Point, Comment} from '../types/offer';
+import {Offers, Offer, OffersGroupByCity, Point, Comment, City} from '../types/offer';
 import CSS from 'csstype';
 import dayjs from 'dayjs';
-import {OfferTypeTitle, Sort, SortType} from '../const';
+import {CitiesList, DEFAULT_CITY, OfferTypeTitle, Sort, SortType} from '../const';
 
 export const groupOffersByCity = (offers: Offers): OffersGroupByCity => {
   const offersGroupByCityObj: {[property: string]: Offers} = {};
@@ -19,6 +19,13 @@ export const groupOffersByCity = (offers: Offers): OffersGroupByCity => {
   });
 
   return offersGroupByCity;
+};
+
+export const getCityByName = (name: string): City => {
+  const index = CitiesList.findIndex((item: City) => item.name === name);
+  return index === -1
+    ? DEFAULT_CITY
+    : CitiesList[index];
 };
 
 export const getStyleWidthByRating = (rating: number): CSS.Properties => ({width: `${rating * 20}%`});

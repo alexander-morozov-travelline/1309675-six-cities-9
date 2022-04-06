@@ -1,6 +1,6 @@
 import {datatype, lorem, date, internet} from 'faker';
 import {City, Offer, Comment, Offers, Comments, User} from '../types/offer';
-import {CityNames, offerTypes} from '../const';
+import {CityNames, OfferTypes} from '../const';
 import {getRandValFromArray} from './common';
 
 const OFFERS_COUNT = 3;
@@ -42,7 +42,7 @@ export const makeFakeOffer = (): Offer => ({
   price: datatype.number(),
   rating: datatype.float(),
   title: lorem.sentence(),
-  type: getRandValFromArray(offerTypes) as string,
+  type: getRandValFromArray(OfferTypes) as string,
 });
 
 export const makeFakeUser = (): User => ({

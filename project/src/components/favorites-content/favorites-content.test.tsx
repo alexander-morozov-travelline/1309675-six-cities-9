@@ -5,7 +5,6 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import {AuthorizationStatus, NameSpace} from '../../const';
 import HistoryRouter from '../../components/history-route/history-route';
 import {makeFakeOffersList, makeFakeUser} from '../../utils/mocks';
-import React from 'react';
 import FavoritesContent from './favorites-content';
 
 const history = createMemoryHistory();

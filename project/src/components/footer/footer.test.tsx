@@ -1,4 +1,3 @@
-import React from 'react';
 import {render, screen} from '@testing-library/react';
 import HistoryRouter from '../history-route/history-route';
 import {createMemoryHistory} from 'history';

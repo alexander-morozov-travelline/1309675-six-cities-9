@@ -41,6 +41,7 @@ export const fetchOfferDataAction = createAsyncThunk<void, string, {
     } catch (error) {
       dispatch(setItemOffer(null));
       errorHandle(error);
+      return;
     }
 
     try {
@@ -71,7 +72,6 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(setUser(data));
     } catch(error) {
-      errorHandle(error);
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
   },

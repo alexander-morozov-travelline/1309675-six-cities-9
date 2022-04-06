@@ -1,7 +1,6 @@
 import {render, screen} from '@testing-library/react';
-import {makeFakeOffersList, makeFakeUser} from '../../utils/mocks';
+import {makeFakeOffersList} from '../../utils/mocks';
 import HistoryRouter from '../history-route/history-route';
-import React from 'react';
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';

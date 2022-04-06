@@ -1,6 +1,8 @@
 import {useAppDispatch} from '../../hooks/hooks';
 import {MouseEvent} from 'react';
 import {logoutAction} from '../../store/api-actions';
+import {AppRoute} from '../../const';
+import {Link} from 'react-router-dom';
 
 function SignOut():JSX.Element {
   const dispatch = useAppDispatch();
@@ -12,9 +14,9 @@ function SignOut():JSX.Element {
 
   return (
     <li className="header__nav-item">
-      <a className="header__nav-link" href="#" onClick={handleSignOut} data-testid="signout-link">
+      <Link className="header__nav-link" to={AppRoute.Root} onClick={handleSignOut} data-testid="signout-link">
         <span className="header__signout">Sign out</span>
-      </a>
+      </Link>
     </li>
   );
 }
