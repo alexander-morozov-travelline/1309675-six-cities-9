@@ -35,7 +35,7 @@ function Header({isLoginPage = false}: HeaderProps): JSX.Element {
                       </div>
                       {
                         authorizationStatus === AuthorizationStatus.Auth && user
-                          ? <span className="header__user-name user__name">{user.email}</span>
+                          ? <span className="header__user-name user__name" data-testid="user-name">{user.email}</span>
                           : <span className="header__login">Sign in</span>
                       }
                     </Link>
