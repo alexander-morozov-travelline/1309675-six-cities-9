@@ -7,7 +7,7 @@ type FavoriteLocationProps = {
 function FavoriteLocation(favoriteLocationProps: FavoriteLocationProps): JSX.Element {
   const {locationName} = favoriteLocationProps;
   return (
-    <div className="favorites__locations locations locations--current">
+    <div className="favorites__locations locations locations--current" data-testid="favorites-locations">
       <div className="locations__item">
         <Link to={AppRoute.Root} className="locations__item-link">
           <span>{locationName}</span>
