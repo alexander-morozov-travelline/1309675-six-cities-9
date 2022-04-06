@@ -12,7 +12,7 @@ function SignOut():JSX.Element {
 
   return (
     <li className="header__nav-item">
-      <a className="header__nav-link" href="#" onClick={handleSignOut}>
+      <a className="header__nav-link" href="#" onClick={handleSignOut} data-testid="signout-link">
         <span className="header__signout">Sign out</span>
       </a>
     </li>

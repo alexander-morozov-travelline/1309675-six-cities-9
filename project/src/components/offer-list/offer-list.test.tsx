@@ -1,7 +1,7 @@
 import {render, screen} from '@testing-library/react';
-import {makeFakeOffersList} from '../../utils/mocks';
+import {makeFakeOffersList, makeFakeUser} from '../../utils/mocks';
 import HistoryRouter from '../history-route/history-route';
-import React, {useState} from 'react';
+import React from 'react';
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';
@@ -19,12 +19,10 @@ const store = mockStore({
 describe('Component: OfferLists', () => {
   it('should render correctly', () => {
     const mockOffersList = makeFakeOffersList();
-    const [activeOffer, setActiveOffer] = useState<null|number>(null);
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>
-          <OfferList offerList={mockOffersList} setActiveOffer={setActiveOffer}/>
-          <div>{activeOffer}</div>
+          <OfferList offerList={mockOffersList} setActiveOffer={jest.fn()}/>
         </HistoryRouter>
       </Provider>,
     );

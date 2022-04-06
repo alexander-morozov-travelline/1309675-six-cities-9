@@ -27,8 +27,8 @@ describe('Component: FavoriteCard', () => {
             cardType={CardType.Cities}
             cardPlaceType={CardPlaceType.Cities}
             offer={mockOffer}
-            /*onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}*/
+            onMouseEnter={jest.fn()}
+            onMouseLeave={jest.fn()}
           />
         </HistoryRouter>
       </Provider>,
