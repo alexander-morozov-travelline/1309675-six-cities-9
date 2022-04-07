@@ -1,9 +1,18 @@
 import Header from '../../components/header/header';
 import LoginForm from '../../components/login-form/login-form';
-import {useAppSelector} from '../../hooks/hooks';
+import {useAppDispatch} from '../../hooks/hooks';
+import {AppRoute, CitiesList} from '../../const';
+import {getRandValFromArray} from '../../utils/common';
+import {City} from '../../types/offer';
+import {setCity} from '../../store/offers-data/offers-data';
+import {Link} from 'react-router-dom';
 
 function Login(): JSX.Element {
-  const {city} = useAppSelector(({OFFERS}) => OFFERS);
+  const city = getRandValFromArray(CitiesList) as City;
+  const dispatch = useAppDispatch();
+
+  const handleClick = (clickedCity: City) => () => dispatch(setCity(clickedCity));
+
   return (
     <div className="page page--gray page--login">
       <Header isLoginPage />
@@ -15,9 +24,9 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <Link className="locations__item-link" onClick={handleClick(city)} to={AppRoute.Root}>
                 <span>{city.name}</span>
-              </a>
+              </Link>
             </div>
           </section>
         </div>

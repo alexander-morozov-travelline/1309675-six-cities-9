@@ -8,7 +8,7 @@ type FavoritesPlacesProps = {
 function FavoritesPlaces(favoriteLocationProps: FavoritesPlacesProps): JSX.Element {
   const {offers} = favoriteLocationProps;
   return (
-    <div className="favorites__places">
+    <div className="favorites__places" data-testid="favorites-places">
       {
         offers.map(
           (offer) => <FavoriteCard key={offer.id} offer={offer} />,
