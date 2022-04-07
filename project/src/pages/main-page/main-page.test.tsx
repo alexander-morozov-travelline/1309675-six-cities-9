@@ -6,7 +6,6 @@ import {AuthorizationStatus, DEFAULT_CITY, NameSpace} from '../../const';
 import MainPage from './main-page';
 import HistoryRouter from '../../components/history-route/history-route';
 import {makeFakeOffersList, makeFakeUser} from '../../utils/mocks';
-import React from 'react';
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();

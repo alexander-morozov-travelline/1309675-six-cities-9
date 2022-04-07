@@ -1,4 +1,3 @@
-import React from 'react';
 import {render, screen} from '@testing-library/react';
 import {makeFakeOffersList} from '../../utils/mocks';
 import HistoryRouter from '../history-route/history-route';

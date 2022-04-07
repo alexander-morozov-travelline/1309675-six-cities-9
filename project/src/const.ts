@@ -193,6 +193,8 @@ export enum BookmarkType {
   Property  = 'property',
 }
 
-export const MIN_COMMENT_LENGTH = 50;
-export const MAX_COMMENT_LENGTH = 300;
-export const MAX_COMMENT_COUNT = 10;
+export enum CommentConfig {
+  MinLength = 50,
+  MaxLength = 300,
+  MaxCount = 10,
+}

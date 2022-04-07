@@ -2,14 +2,15 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {Link} from 'react-router-dom';
 import SignOut from '../sign-out/sign-out';
 import {useAppSelector} from '../../hooks/hooks';
+import {getAuthorizationStatus, getUser} from '../../store/user-process/selectors';
 
 type HeaderProps = {
   isLoginPage?: boolean
 };
 
 function Header({isLoginPage = false}: HeaderProps): JSX.Element {
-  const {authorizationStatus} = useAppSelector(({USER}) => USER);
-  const {user} = useAppSelector(({USER}) => USER);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUser);
 
   return (
     <header className="header" data-testid="header">

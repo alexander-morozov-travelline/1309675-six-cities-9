@@ -1,6 +1,5 @@
 import {Offers} from '../../types/offer';
 import PlaceCard from '../place-card/place-card';
-import React from 'react';
 import {CardPlaceType, CardType} from '../../const';
 
 type OfferListProps = {

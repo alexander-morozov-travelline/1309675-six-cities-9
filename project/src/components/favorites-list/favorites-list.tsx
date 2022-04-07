@@ -1,7 +1,6 @@
 import FavoriteLocation from '../favorite-location/favorite-location';
 import FavoritesPlaces from '../favorites-places/favorites-places';
 import {OffersGroupByCity} from '../../types/offer';
-import React from 'react';
 
 type FavoritesListProps = {
   offersGroupByCity: OffersGroupByCity

@@ -1,6 +1,5 @@
 import Review from '../revew/review';
 import {Comment} from '../../types/offer';
-import React from 'react';
 
 type ReviewsListProperties = {
   comments: Comment[],

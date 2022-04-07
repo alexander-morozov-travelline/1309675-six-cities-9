@@ -6,7 +6,7 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import HistoryRouter from '../history-route/history-route';
 import {AppRoute, AuthorizationStatus, DEFAULT_CITY, NameSpace} from '../../const';
 import App from './app';
-import {makeFakeOffersList, makeFakeOffer, makeFakeUser} from '../../utils/mocks';
+import {makeFakeOffersList, makeFakeOffer, makeFakeUser, makeFakeComment} from '../../utils/mocks';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -22,7 +22,7 @@ const store = mockStore({
     favorites: mockOffers,
     isDataLoaded: true,
   },
-  [NameSpace.Comments]: [],
+  [NameSpace.Comments]: makeFakeComment(),
   [NameSpace.User]: {
     user: makeFakeUser(),
     authorizationStatus: AuthorizationStatus.Auth,

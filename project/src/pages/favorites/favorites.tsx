@@ -6,11 +6,12 @@ import {loadFavorites} from '../../store/offers-data/offers-data';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import FavoritesContent from '../../components/favorites-content/favorites-content';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
+import {getFavorites} from '../../store/offers-data/selectors';
 
 
 function Favorites(): JSX.Element {
   const dispatch = useAppDispatch();
-  const {favorites} = useAppSelector(({OFFERS}) => OFFERS);
+  const favorites = useAppSelector(getFavorites);
 
 
   useEffect( () => {

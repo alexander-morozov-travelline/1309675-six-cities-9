@@ -5,7 +5,6 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import {AuthorizationStatus, DEFAULT_CITY, NameSpace} from '../../const';
 import HistoryRouter from '../../components/history-route/history-route';
 import {makeFakeUser} from '../../utils/mocks';
-import React from 'react';
 import Login from './login';
 
 const history = createMemoryHistory();

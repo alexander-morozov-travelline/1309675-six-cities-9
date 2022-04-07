@@ -1,23 +1,16 @@
-import React from 'react';
 import {render, screen} from '@testing-library/react';
 import HistoryRouter from '../history-route/history-route';
 import {createMemoryHistory} from 'history';
-import {DEFAULT_CITY, NameSpace} from '../../const';
+import {DEFAULT_CITY} from '../../const';
 import FavoriteLocation from './favorite-location';
+import {store} from '../../store';
 import {Provider} from 'react-redux';
-import {configureMockStore} from '@jedmao/redux-mock-store';
 
 const history = createMemoryHistory();
-const mockStore = configureMockStore();
-const store = mockStore({
-  [NameSpace.Offers]: {
-    city: DEFAULT_CITY,
-    isDataLoaded: true,
-  },
-});
 
 describe('Component: FavoriteLocation', () => {
   it('should render correctly', () => {
+    store.dispatch = jest.fn();
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>

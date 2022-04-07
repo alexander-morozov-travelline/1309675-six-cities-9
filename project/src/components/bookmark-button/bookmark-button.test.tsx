@@ -1,7 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import BookmarkButton from './bookmark-button';
-import {AppRoute, AuthorizationStatus, BookmarkType, NameSpace} from '../../const';
-import React from 'react';
+import {AuthorizationStatus, BookmarkType, NameSpace} from '../../const';
 import {makeFakeOffer, makeFakeUser} from '../../utils/mocks';
 import {Provider} from 'react-redux';
 import HistoryRouter from '../history-route/history-route';
@@ -10,7 +9,6 @@ import {createMemoryHistory} from 'history';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
-history.push(`${AppRoute.Offer}/1`);
 
 const store = mockStore({
   [NameSpace.User]: {

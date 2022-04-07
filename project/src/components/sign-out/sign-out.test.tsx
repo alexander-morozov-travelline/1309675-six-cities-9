@@ -1,5 +1,4 @@
 import {render, screen} from '@testing-library/react';
-import React from 'react';
 import * as Redux from 'react-redux';
 import HistoryRouter from '../history-route/history-route';
 import {createMemoryHistory} from 'history';

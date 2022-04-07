@@ -16,23 +16,25 @@ import {fetchOfferDataAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import NotFound from '../not-found/not-found';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
-import {AuthorizationStatus, BookmarkType, MAX_COMMENT_COUNT} from '../../const';
+import {AuthorizationStatus, BookmarkType, CommentConfig} from '../../const';
 import {loadNearOffers, setItemOffer} from '../../store/offers-data/offers-data';
 import {loadOfferComments} from '../../store/comments-data/comments-data';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 import {Comments} from '../../types/offer';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {getItemOffer, getNearOffers} from '../../store/offers-data/selectors';
+import {getComments} from '../../store/comments-data/selectors';
 
 function Property() {
   const dispatch = useAppDispatch();
   const {id=null} = useParams<{id: string}>();
 
-  const {authorizationStatus} = useAppSelector(({USER}) => USER);
-  const {itemOffer: offer, nearOffers} = useAppSelector(({OFFERS}) => OFFERS);
-  const {comments} = useAppSelector(({COMMENTS}) => COMMENTS);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const offer = useAppSelector(getItemOffer);
+  const nearOffers = useAppSelector(getNearOffers);
+  const comments = useAppSelector(getComments);
 
-  const formattedComments: Comments = comments
-    ? [...comments].sort(sortCommentDateDown).slice(0, MAX_COMMENT_COUNT)
-    : [];
+  const formattedComments: Comments = comments ? [...comments].sort(sortCommentDateDown).slice(0, CommentConfig.MaxCount) : [];
 
   useEffect( () => {
     if(id) {

@@ -1,15 +1,16 @@
 import {useState, Fragment, FormEvent, ChangeEvent} from 'react';
-import {MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, RatesList} from '../../const';
+import {CommentConfig, RatesList} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {CommentDataForm} from '../../types/offer';
 import {sendCommentAction} from '../../store/api-actions';
+import {getItemOffer} from '../../store/offers-data/selectors';
 
 function ReviewForm(): JSX.Element | null {
   const dispatch = useAppDispatch();
   const initState: CommentDataForm = {rating: null, review: ''};
   const [formData, setFormData] = useState(initState);
   const [isDisabled, setDisabled] = useState(false);
-  const {itemOffer: offer} = useAppSelector(({OFFERS}) => OFFERS);
+  const offer = useAppSelector(getItemOffer);
 
   if(!offer) {
     return null;
@@ -62,16 +63,16 @@ function ReviewForm(): JSX.Element | null {
         value={formData.review}
         onChange={handleDataChange}
         disabled={isDisabled}
-        maxLength={MAX_COMMENT_LENGTH}
+        maxLength={CommentConfig.MaxLength}
         data-testid="comment-text"
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and
-          describe your stay with at least <b className="reviews__text-amount">{MIN_COMMENT_LENGTH} characters</b>.
+          describe your stay with at least <b className="reviews__text-amount">{CommentConfig.MinLength} characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" data-testid="review-submit"
-          disabled={isDisabled || !(formData.rating && formData.review && formData.review.length>MIN_COMMENT_LENGTH)}
+          disabled={isDisabled || !(formData.rating && formData.review && formData.review.length>CommentConfig.MinLength)}
         >
           Submit
         </button>

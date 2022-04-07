@@ -2,7 +2,6 @@ import {render, screen} from '@testing-library/react';
 import PlaceCard from './place-card';
 import {makeFakeOffer} from '../../utils/mocks';
 import HistoryRouter from '../history-route/history-route';
-import React from 'react';
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';

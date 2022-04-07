@@ -1,6 +1,5 @@
 import {render, screen} from '@testing-library/react';
 import {makeFakeCommentList} from '../../utils/mocks';
-import React from 'react';
 import ReviewsList from './reviews-list';
 
 describe('Component: ReviewList', () => {

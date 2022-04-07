@@ -1,9 +1,10 @@
-import React, {MouseEvent} from 'react';
+import {MouseEvent} from 'react';
 import {AppRoute, AuthorizationStatus, FavoriteStatus} from '../../const';
 import {Offer} from '../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {redirectToRoute} from '../../store/action';
 import {setFavoriteAction} from '../../store/api-actions';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
 type BookmarkButtonProperty = {
   offer: Offer,
@@ -15,13 +16,13 @@ type BookmarkButtonProperty = {
 function BookmarkButton(bookmarkButtonProperty: BookmarkButtonProperty):JSX.Element {
   const {offer, width, height, type} = bookmarkButtonProperty;
   const dispatch = useAppDispatch();
-  const {authorizationStatus} = useAppSelector(({USER}) => USER);
-
-  const active = offer.isFavorite ?  ` ${type}__bookmark-button--active` : '';
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isAuthorize = authorizationStatus === AuthorizationStatus.Auth;
+  const active = isAuthorize && offer.isFavorite ? ` ${type}__bookmark-button--active` : '';
 
   const handleFavoriteClick = (evt: MouseEvent<HTMLElement>) => {
     evt.preventDefault();
-    if(authorizationStatus === AuthorizationStatus.Auth) {
+    if(isAuthorize) {
       const favoriteStatus = offer.isFavorite ? FavoriteStatus.NOT_FAVORITE : FavoriteStatus.FAVORITE;
       dispatch(setFavoriteAction({hotelId: offer.id, status: favoriteStatus}));
     } else {

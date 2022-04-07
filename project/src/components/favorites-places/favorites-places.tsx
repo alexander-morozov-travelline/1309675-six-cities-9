@@ -1,5 +1,4 @@
 import {Offer} from '../../types/offer';
-import React from 'react';
 import FavoriteCard from '../favorite-card/favorite-card';
 
 type FavoritesPlacesProps = {
