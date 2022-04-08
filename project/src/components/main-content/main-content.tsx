@@ -26,9 +26,9 @@ function MainContent(mainContentProps: MainContentProps): JSX.Element {
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">{cityOffers.length} places to stay in {city.name}</b>
-          <PlacesSorting sortType={sortType} setSortType={setSortType}></PlacesSorting>
+          <PlacesSorting sortType={sortType} onSetSortType={setSortType}></PlacesSorting>
           <div className="cities__places-list places__list tabs__content">
-            <OfferList offerList={getSortedCityOffers()} setActiveOffer={setActiveOffer} />
+            <OfferList offerList={getSortedCityOffers()} onSetActiveOffer={setActiveOffer} />
           </div>
         </section>
         <div className="cities__right-section">

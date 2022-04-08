@@ -4,18 +4,18 @@ import {CardPlaceType, CardType} from '../../const';
 
 type OfferListProps = {
   offerList: Offers,
-  setActiveOffer: (id: number | null) => void,
+  onSetActiveOffer: (id: number | null) => void,
 }
 
 function OfferList(offerListProps: OfferListProps): JSX.Element {
-  const {offerList, setActiveOffer} = offerListProps;
+  const {offerList, onSetActiveOffer} = offerListProps;
 
   const handleMouseEnter = (id: number): void => {
-    setActiveOffer(id);
+    onSetActiveOffer(id);
   };
 
   const handleMouseLeave = (): void => {
-    setActiveOffer(null);
+    onSetActiveOffer(null);
   };
 
   return (

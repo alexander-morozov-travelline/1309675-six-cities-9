@@ -1,6 +1,6 @@
 import {datatype, lorem, date, internet} from 'faker';
 import {City, Offer, Comment, Offers, Comments, User} from '../types/offer';
-import {CityNames, OfferTypes} from '../const';
+import {cityNames, offerTypes} from '../const';
 import {getRandValFromArray} from './common';
 
 const OFFERS_COUNT = 3;
@@ -18,7 +18,7 @@ export const makeFakeOffer = (): Offer => ({
       longitude: datatype.float(),
       zoom: datatype.number(),
     },
-    name: getRandValFromArray(CityNames) as string,
+    name: getRandValFromArray(cityNames) as string,
   },
   description: lorem.sentence(),
   goods: Array.from(Array(GOOODS_COUNT), () => lorem.word()),
@@ -42,7 +42,7 @@ export const makeFakeOffer = (): Offer => ({
   price: datatype.number(),
   rating: datatype.float(),
   title: lorem.sentence(),
-  type: getRandValFromArray(OfferTypes) as string,
+  type: getRandValFromArray(offerTypes) as string,
 });
 
 export const makeFakeUser = (): User => ({
@@ -69,6 +69,6 @@ export const makeFakeCity = (): City => ({
     longitude: datatype.number(),
     zoom: datatype.number(),
   },
-  name: getRandValFromArray(CityNames) as string,
+  name: getRandValFromArray(cityNames) as string,
 });
 

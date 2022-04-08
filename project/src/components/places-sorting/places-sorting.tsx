@@ -2,11 +2,11 @@ import {SortList, Sort} from '../../const';
 import {useState} from 'react';
 
 type PlacesSortingProps = {
-  setSortType: (sortType: Sort) => void,
+  onSetSortType: (sortType: Sort) => void,
   sortType: Sort,
 }
 function PlacesSorting(placesSortingProps: PlacesSortingProps):JSX.Element {
-  const {setSortType, sortType} = placesSortingProps;
+  const {onSetSortType, sortType} = placesSortingProps;
   const [isSortMenuOpened, setIsSortMenuOpened] = useState<boolean>(false);
 
   const onSortMenuClick = () => {
@@ -14,7 +14,7 @@ function PlacesSorting(placesSortingProps: PlacesSortingProps):JSX.Element {
   };
 
   const onSortTypeClick = (sort: Sort) => {
-    setSortType(sort);
+    onSetSortType(sort);
     setIsSortMenuOpened(false);
   };
 

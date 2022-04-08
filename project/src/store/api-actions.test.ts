@@ -166,10 +166,10 @@ describe('Async actions', () => {
   it('should dispatch SET_favorite when POST /favorite', async () => {
     const mockOffer = makeFakeOffer();
     const HOTEL_ID = 1;
-    const favoriteSetData: FavoriteSetData = {hotelId: HOTEL_ID, status: FavoriteStatus.FAVORITE};
+    const favoriteSetData: FavoriteSetData = {hotelId: HOTEL_ID, status: FavoriteStatus.Favorite};
 
     mockAPI
-      .onGet(`${APIRoute.Favorites}/${HOTEL_ID}/${FavoriteStatus.FAVORITE}`)
+      .onGet(`${APIRoute.Favorites}/${HOTEL_ID}/${FavoriteStatus.Favorite}`)
       .reply(200, mockOffer);
 
     const store = mockStore();

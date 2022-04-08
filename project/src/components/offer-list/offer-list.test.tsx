@@ -21,7 +21,7 @@ describe('Component: OfferLists', () => {
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>
-          <OfferList offerList={mockOffersList} setActiveOffer={jest.fn()}/>
+          <OfferList offerList={mockOffersList} onSetActiveOffer={jest.fn()}/>
         </HistoryRouter>
       </Provider>,
     );

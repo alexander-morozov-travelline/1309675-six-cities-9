@@ -71,7 +71,7 @@ export const DEFAULT_CITY: City =   {
   },
   name: 'Paris',
 };
-export const CitiesList: City[] =  [
+export const citiesList: City[] =  [
   DEFAULT_CITY,
   {
     location: {
@@ -115,9 +115,9 @@ export const CitiesList: City[] =  [
   },
 ];
 
-export const CityNames = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+export const cityNames = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-export const OfferTypes = ['apartment', 'room', 'house', 'hotel'];
+export const offerTypes = ['apartment', 'room', 'house', 'hotel'];
 
 export const SortType = {
   POPULAR: 'popular',
@@ -156,10 +156,10 @@ export const SortList: Sort[] = [
   },
 ];
 
-export enum HTTP_CODE {
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  NOT_FOUND = 404,
+export enum HttpCode {
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404,
 }
 
 export enum APIRoute {
@@ -184,8 +184,8 @@ export enum NameSpace {
 }
 
 export enum FavoriteStatus {
-  NOT_FAVORITE = 0,
-  FAVORITE = 1,
+  NotFavorite = 0,
+  Favorite = 1,
 }
 
 export enum BookmarkType {

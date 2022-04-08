@@ -6,7 +6,7 @@ import PlacesSorting from './places-sorting';
 describe('Component: PlacesSorting', () => {
   it('should render correctly', () => {
     render(
-      <PlacesSorting sortType={DEFAULT_SORT} setSortType={jest.fn()}></PlacesSorting>,
+      <PlacesSorting sortType={DEFAULT_SORT} onSetSortType={jest.fn()}></PlacesSorting>,
     );
 
     expect(screen.getByTestId('places-sorting')).toBeInTheDocument();

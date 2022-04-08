@@ -23,7 +23,7 @@ function BookmarkButton(bookmarkButtonProperty: BookmarkButtonProperty):JSX.Elem
   const handleFavoriteClick = (evt: MouseEvent<HTMLElement>) => {
     evt.preventDefault();
     if(isAuthorize) {
-      const favoriteStatus = offer.isFavorite ? FavoriteStatus.NOT_FAVORITE : FavoriteStatus.FAVORITE;
+      const favoriteStatus = offer.isFavorite ? FavoriteStatus.NotFavorite : FavoriteStatus.Favorite;
       dispatch(setFavoriteAction({hotelId: offer.id, status: favoriteStatus}));
     } else {
       dispatch(redirectToRoute(AppRoute.Login));

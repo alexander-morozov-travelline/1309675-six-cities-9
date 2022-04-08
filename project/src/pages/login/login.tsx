@@ -1,14 +1,14 @@
 import Header from '../../components/header/header';
 import LoginForm from '../../components/login-form/login-form';
 import {useAppDispatch} from '../../hooks/hooks';
-import {AppRoute, CitiesList} from '../../const';
+import {AppRoute, citiesList} from '../../const';
 import {getRandValFromArray} from '../../utils/common';
 import {City} from '../../types/offer';
 import {setCity} from '../../store/offers-data/offers-data';
 import {Link} from 'react-router-dom';
 
 function Login(): JSX.Element {
-  const city = getRandValFromArray(CitiesList) as City;
+  const city = getRandValFromArray(citiesList) as City;
   const dispatch = useAppDispatch();
 
   const handleClick = (clickedCity: City) => () => dispatch(setCity(clickedCity));
